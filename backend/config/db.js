@@ -1,4 +1,5 @@
 const mysql = require("mysql2");
+require("dotenv").config();
 
 const connection = mysql.createPool({
   user: process.env.USER,
@@ -13,10 +14,9 @@ const connection = mysql.createPool({
   queueLimit: 0,
 });
 
-connection.connect((err, data) => {
+connection.getConnection((err, data) => {
   if (err) {
     console.log("Can't connect to the database.");
-    return;
   }
 
   return console.log("connected to the database.");

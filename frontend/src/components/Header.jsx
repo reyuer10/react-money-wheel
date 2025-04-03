@@ -1,5 +1,6 @@
 import React from 'react'
-import casinoPlusPng from "../assets/pictures/casino-logo.png"
+import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
+
 
 function Header() {
     return (
@@ -11,7 +12,7 @@ function Header() {
             <div>
                 <img
                     className='h-[100%] w-[250px]'
-                    src={casinoPlusPng}
+                    src={casinoPlusWhite}
                     alt="casino-bg" />
             </div>
             <div className='flex items-center flex-col'>

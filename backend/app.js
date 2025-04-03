@@ -4,7 +4,7 @@ const cors = require("cors");
 // const ws = require("ws");
 // const WebSocket = require("ws");
 const app = express();
-// const gameModifiedRoutes = require("./routes/gameModifiedRoutes");
+const gameModifiedRoutes = require("./routes/gameModifiedRoutes");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-// app.use("/api/baccarat", gameModifiedRoutes);
+app.use("/api/moneywheel", gameModifiedRoutes);
 
 const PORT = process.env.PORT || 3000;
 
