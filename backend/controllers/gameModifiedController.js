@@ -16,8 +16,12 @@ exports.getTableInfo = async (req, res) => {
   const queryGetCustomizeTableResults =
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ?";
 
+  const queryGetResultCount =
+    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+
   try {
     const tableResultsMin = 21;
+    const getResultsCount = await databaseQuery(queryGetResultCount);
     const getLatestResultsId = await databaseQuery(
       queryGetMinMaxTableResultCount
     );
@@ -43,10 +47,22 @@ exports.getTableInfo = async (req, res) => {
       [startIndex, latestResultsId]
     );
 
+    function calculatePercentageResults() {
+      let newArr = [];
+      getResultsCount.map((c) =>
+        newArr.push({
+          resultName: c.results_num,
+          calc: Number((c.count / tableTotalLength) * 100).toFixed(0) + "%",
+        })
+      );
+      return newArr;
+    }
+
     return res.status(OK).send({
       tableInfo: getTableInfo,
       tableResults:
         tableTotalLength <= 21 ? getTableResults : getCustomizeTableResults,
+      tablePercentage: calculatePercentageResults(),
     });
   } catch (error) {
     return res.status(InternalServer).send({
@@ -79,7 +95,6 @@ exports.postResults = async (req, res) => {
     const tableResultsMin = 21;
     await databaseQuery(queryInsertResults, [results_num]);
 
-    const getResultsCount = await databaseQuery(queryGetResultCount);
     const getTableResults = await databaseQuery(queryGetTableResults);
     const tableTotalLength = getTableResults.length;
     const getLatestResultsId = await databaseQuery(
@@ -102,23 +117,22 @@ exports.postResults = async (req, res) => {
       [startIndex, latestResultsId]
     );
 
+    const getResultsCount = await databaseQuery(queryGetResultCount);
     function calculatePercentageResults() {
       let newArr = [];
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: (c.count / tableTotalLength) * 100,
+          calc: Number((c.count / tableTotalLength) * 100).toFixed(0) + "%",
         })
       );
       return newArr;
     }
 
-    console.log(calculatePercentageResults());
-    console.log(tableTotalLength);
-
     return res.status(OK).send({
       tableResults:
         tableTotalLength <= 21 ? getTableResults : getCustomizeTableResults,
+      tablePercentage: calculatePercentageResults(),
     });
   } catch (error) {
     return res.status(InternalServer).send({
@@ -145,15 +159,19 @@ exports.deleteResults = async (req, res) => {
   const queryGetCustomizeTableResults =
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
+  const queryGetResultCount =
+    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+
   try {
+    const tableResultsMin = 21;
     const getLatestResultsId = await databaseQuery(queryGetLatestResultsId);
+
     const latestResultsId = getLatestResultsId[0]?.results_id;
     await databaseQuery(queryDeleteLatestResults, [latestResultsId]);
 
     const getTableResults = await databaseQuery(queryGetTableResults);
 
     const tableTotalLength = getTableResults.length;
-    const tableResultsMin = 21;
     const getLatestMaxResultId = await databaseQuery(
       queryGetMinMaxTableResultCount
     );
@@ -177,9 +195,24 @@ exports.deleteResults = async (req, res) => {
       [startIndex, maxResultsId]
     );
 
+    const getResultsCount = await databaseQuery(queryGetResultCount);
+    function calculatePercentageResults() {
+      console.log(getResultsCount);
+      console.log("Total length: ", tableTotalLength);
+      let newArr = [];
+      getResultsCount.map((c) =>
+        newArr.push({
+          resultName: c.results_num,
+          calc: Number((c.count / tableTotalLength) * 100).toFixed(0) + "%",
+        })
+      );
+      return newArr;
+    }
+
     return res.status(OK).send({
       tableResults:
         tableTotalLength <= 21 ? getTableResults : getCustomizeTableResults,
+      tablePercentage: calculatePercentageResults(),
     });
   } catch (error) {
     return res.status(InternalServer).send({

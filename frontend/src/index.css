@@ -111,3 +111,11 @@
 .text-shadow {
   text-shadow: 5px 5px 4px rgba(0, 0, 0, 0.51);
 }
+
+.modal-background {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.wheel-clip-path {
+  clip-path: polygon(100% 0, 0 0, 90% 100%);
+}

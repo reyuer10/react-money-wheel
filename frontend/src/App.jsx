@@ -7,13 +7,18 @@ import PercentageSection from './components/PercentageSection'
 import AdvertisementSection from './components/AdvertisementSection'
 import TableInformation from './components/TableInformation'
 import { fetchDeleteResults, fetchGetResults, fetchInsertResults } from './services/gameModifedApi'
+import ModalResults from './modal/ModalResults'
+import ResultsWinningSection from './components/ResultsWinningSection'
 
 
 
 
 function App() {
   let keySequence = ''
-  const [results, setResults] = useState([])
+  const [results, setResults] = useState([]);
+  const [percentage, setPercentage] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [resultNum, setResultNum] = useState(null)
 
   const handleEnterKeyCode = async (e) => {
     let keyPress = e.key
@@ -23,34 +28,51 @@ function App() {
           const response = await fetchInsertResults({
             results_num: 1
           })
-          setResults(response.tableResults)
+          setResults(response.tableResults);
+          setPercentage(response.tablePercentage)
+          setIsModalOpen(true)
+          setResultNum(1)
         } else if (keySequence == 2) {
           const response = await fetchInsertResults({
             results_num: 3
           })
           setResults(response.tableResults)
+          setPercentage(response.tablePercentage)
+          setIsModalOpen(true)
+          setResultNum(3)
         } else if (keySequence == 3) {
           const response = await fetchInsertResults({
             results_num: 5
           })
           setResults(response.tableResults)
+          setPercentage(response.tablePercentage)
+          setIsModalOpen(true)
+          setResultNum(5)
         } else if (keySequence == 4) {
           const response = await fetchInsertResults({
             results_num: 10
           })
           setResults(response.tableResults)
-
+          setPercentage(response.tablePercentage)
+          setIsModalOpen(true)
+          setResultNum(10)
         } else if (keySequence == 5) {
           const response = await fetchInsertResults({
             results_num: 25
           })
           setResults(response.tableResults)
+          setPercentage(response.tablePercentage)
+          setIsModalOpen(true)
+          setResultNum(25)
         } else if (keySequence == 6) {
           const response = await fetchDeleteResults()
           setResults(response.tableResults)
+          setPercentage(response.tablePercentage)
         }
         keySequence = ''
       }
+
+      // console.log(tableResults)
 
       if (
         e.key === "1" ||
@@ -68,6 +90,7 @@ function App() {
       console.log(error)
     }
   }
+
   useEffect(() => {
     document.body.addEventListener("keydown", handleEnterKeyCode)
     return () => {
@@ -76,14 +99,26 @@ function App() {
   }, [results]);
 
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsModalOpen(false)
+      setResultNum(null)
+    }, 3000)
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [isModalOpen])
+
+
 
 
   useEffect(() => {
     const handleFetchGetTableInfo = async () => {
       try {
         const response = await fetchGetResults();
-        console.log(response)
+        // console.log(response)
         setResults(response.tableResults)
+        setPercentage(response.tablePercentage)
       } catch (error) {
         console.log(error)
       }
@@ -114,9 +149,9 @@ function App() {
                   <TableInformation />
                 </div>
                 <div className="h-[30%] border-r-4 border-pink-500 overflow-hidden ">
-                  <PercentageSection />
+                  <PercentageSection percentage={percentage} />
                 </div>
-                <div className="h-[50%] border-b-4 border-r-4 border-t-4 border-pink-500 ">
+                <div className="h-[50%] flex justify-center items-center border-b-4 border-r-4 border-t-4 border-pink-500 ">
                   <AdvertisementSection />
                 </div>
               </div>
@@ -127,6 +162,9 @@ function App() {
           <Footer />
         </div>
       </div>
+      <ModalResults isModalOpen={isModalOpen}>
+        <ResultsWinningSection resultNumber={resultNum} />
+      </ModalResults>
     </div>
   );
 
