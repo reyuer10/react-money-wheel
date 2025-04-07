@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { motion } from "motion/react"
 
 import red from "../assets/pictures/red-icon.png"
@@ -8,7 +8,7 @@ import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
 
 
-function SideSection({ results }) {
+function SideSection({ resultPulse, setResultsPulse, results }) {
     console.log(results)
 
     function customizeColorBasedOnNum(num) {
@@ -28,6 +28,16 @@ function SideSection({ results }) {
         if (num == 1) return white
     }
 
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setResultsPulse(false)
+        }, 12000);
+
+        return () => {
+            clearTimeout(timeout)
+        }
+    }, [resultPulse])
+
     return (
         <div className='text-4xl font-bold'>
             {results.map((r, index) => {
@@ -46,7 +56,7 @@ function SideSection({ results }) {
                                 opacity: 1,
                                 x: index == 0 ? 0 : 1,
                             }}
-                            className={` relative overflow-hidden text-[72px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[240px] flex justify-center items-center m-6 rounded-2xl`}>
+                            className={`  ${resultPulse ? "transition-all animate-pulse neonText" : ""}  relative overflow-hidden text-[142px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[240px] flex justify-center items-center m-6 rounded-2xl`}>
                             <div className='absolute -top-[250px] -bottom-[40px]'>
                                 <img
                                     className=' opacity-5 h-[500px]'

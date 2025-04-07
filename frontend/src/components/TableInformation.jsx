@@ -6,8 +6,9 @@ import yellow from "../assets/pictures/yellowIcon.png"
 import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
 
-function TableInformation() {
-    const [count, setCount] = useState(0)
+function TableInformation({ fastNumInterval, count, setCount }) {
+
+
     const [num, setNum] = useState([
         {
             idNum: 1,
@@ -123,14 +124,14 @@ function TableInformation() {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setCount(prevCount => prevCount + 2);
+            setCount(prevCount => prevCount + fastNumInterval);
         }, 100);
 
 
         return () => {
             clearTimeout(interval)
         }
-    }, []);
+    }, [fastNumInterval]);
 
     return (
         <div className='text-[100px] font-bold'>

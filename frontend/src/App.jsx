@@ -18,7 +18,10 @@ function App() {
   const [results, setResults] = useState([]);
   const [percentage, setPercentage] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [resultNum, setResultNum] = useState(null)
+  const [resultPulse, setResultsPulse] = useState(false)
+  const [resultNum, setResultNum] = useState(null);
+  const [fastNumInterval, setFastNumInterval] = useState(2)
+  const [count, setCount] = useState(0);
 
   const handleEnterKeyCode = async (e) => {
     let keyPress = e.key
@@ -30,7 +33,9 @@ function App() {
           })
           setResults(response.tableResults);
           setPercentage(response.tablePercentage)
+          setResultsPulse(true)
           setIsModalOpen(true)
+          setFastNumInterval(30);
           setResultNum(1)
         } else if (keySequence == 2) {
           const response = await fetchInsertResults({
@@ -38,7 +43,10 @@ function App() {
           })
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
+          setResultsPulse(true)
           setIsModalOpen(true)
+          setCount(0)
+          setFastNumInterval(30);
           setResultNum(3)
         } else if (keySequence == 3) {
           const response = await fetchInsertResults({
@@ -46,7 +54,10 @@ function App() {
           })
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
+          setResultsPulse(true)
           setIsModalOpen(true)
+          setCount(0)
+          setFastNumInterval(30);
           setResultNum(5)
         } else if (keySequence == 4) {
           const response = await fetchInsertResults({
@@ -54,7 +65,10 @@ function App() {
           })
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
+          setResultsPulse(true)
           setIsModalOpen(true)
+          setCount(0)
+          setFastNumInterval(30);
           setResultNum(10)
         } else if (keySequence == 5) {
           const response = await fetchInsertResults({
@@ -62,7 +76,10 @@ function App() {
           })
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
+          setResultsPulse(true)
           setIsModalOpen(true)
+          setCount(0)
+          setFastNumInterval(30);
           setResultNum(25)
         } else if (keySequence == 6) {
           const response = await fetchDeleteResults()
@@ -99,9 +116,11 @@ function App() {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
+      setFastNumInterval(2)
       setIsModalOpen(false)
       setResultNum(null)
-    }, 3000)
+    }, 5000)
+
     return () => {
       clearTimeout(timeout)
     }
@@ -135,7 +154,10 @@ function App() {
           <div className='h-full flex w-full'>
             <div className='text-center border-b-4 border-r-4 border-l-4 border-pink-500 w-[30%]'>
               <div>
-                <SideSection results={results} />
+                <SideSection
+                  setResultsPulse={setResultsPulse}
+                  resultPulse={resultPulse}
+                  results={results} />
               </div>
             </div>
             <div className=' w-[70%]'>
@@ -144,7 +166,11 @@ function App() {
                   <TitleSection />
                 </div>
                 <div className="h-[10%] border-r-4 border-b-4 border-pink-500 overflow-hidden flex justify-center relative">
-                  <TableInformation />
+                  <TableInformation
+                    count={count}
+                    setCount={setCount}
+                    fastNumInterval={fastNumInterval}
+                  />
                 </div>
                 <div className="h-[30%] border-r-4 border-pink-500 overflow-hidden ">
                   <PercentageSection percentage={percentage} />
@@ -161,7 +187,10 @@ function App() {
         </div>
       </div>
       <ModalResults isModalOpen={isModalOpen}>
-        <ResultsWinningSection resultNumber={resultNum} />
+        <ResultsWinningSection
+          resultNumber={resultNum}
+          percentage={percentage}
+        />
       </ModalResults>
     </div>
   );
