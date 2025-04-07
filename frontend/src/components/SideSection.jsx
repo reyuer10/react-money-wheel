@@ -12,11 +12,11 @@ function SideSection({ results }) {
     console.log(results)
 
     function customizeColorBasedOnNum(num) {
-        if (num == 25) return "bg-red-500  text-white text-shadow border-4 border-red-200"
-        if (num == 10) return "bg-yellow-400 text-white text-shadow border-4 border-yellow-200"
-        if (num == 5) return "bg-blue-600 text-white text-shadow border-4 border-blue-200"
-        if (num == 3) return "bg-pink-600 text-white text-shadow border-4 border-pink-200"
-        if (num == 1) return "bg-orange-600 text-white text-shadow border-4 border-orange-200"
+        if (num == 25) return "bg-gradient-to-r from-red-500 via-red-700 to-red-900 text-white text-shadow-side-section border-4 border-red-200 shadow-xl shadow-red-700"
+        if (num == 10) return "bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-800 text-white text-shadow-side-section border-4 border-yellow-200 shadow-xl shadow-yellow-700"
+        if (num == 5) return " bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 bg-blue-600 text-white text-shadow-side-section border-4 border-blue-200 shadow-xl shadow-blue-700"
+        if (num == 3) return "bg-gradient-to-r from-pink-500 via-pink-700 to-pink-900 text-white text-shadow-side-section border-4 border-pink-200 shadow-xl shadow-pink-700"
+        if (num == 1) return "bg-gradient-to-r from-orange-500 via-orange-600 to-orange-900 text-white text-shadow-side-section border-4 border-orange-200 shadow-xl shadow-orange-700"
     }
 
 
@@ -46,13 +46,13 @@ function SideSection({ results }) {
                                 opacity: 1,
                                 x: index == 0 ? 0 : 1,
                             }}
-                            className={`relative overflow-hidden text-[72px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[120px] flex justify-center items-center m-6 rounded-2xl`}>
+                            className={` relative overflow-hidden text-[72px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[240px] flex justify-center items-center m-6 rounded-2xl`}>
                             <div className='absolute -top-[250px] -bottom-[40px]'>
                                 <img
                                     className=' opacity-5 h-[500px]'
                                     src={customizeImageByNum(r.results_num)} alt="character" />
                             </div>
-                            <div className='absolute -left-[5px] -bottom-[40px]'>
+                            <div className='absolute left-[10px]'>
                                 <img
                                     className=' opacity-70 h-[200px]'
                                     src={customizeImageByNum(r.results_num)} alt="character" />

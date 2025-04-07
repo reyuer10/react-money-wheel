@@ -62,7 +62,7 @@ function PercentageSection({ percentage }) {
                     </span>
                     <span className='text-shadow z-30'>{initPercentage(25)}</span>
                     <span
-                        className={` transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-red-900 via-red-800 to-red-700  overflow-hidden`}
+                        className={`animate-pulse transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-red-900 via-red-800 to-red-700  overflow-hidden`}
                         style={{
                             width: `${initPercentage(25)}`
                         }}
@@ -95,7 +95,7 @@ function PercentageSection({ percentage }) {
                     </span>
                     <span className='text-shadow z-20'>{initPercentage(10)}</span>
                     <span
-                        className={`transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-yellow-800 via-yellow-700 to-yellow-600  overflow-hidden`}
+                        className={`animate-pulse transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-yellow-800 via-yellow-700 to-yellow-600  overflow-hidden`}
                         style={{
                             width: `${initPercentage(10)}`
                         }}
@@ -122,13 +122,12 @@ function PercentageSection({ percentage }) {
                     <span className='z-20'>
                         <img
                             className={`h-[90px] ${customizeRemovePercentage(initPercentage(5)) >= 50 ? 'animate-bounce' : null}`}
-
                             src={blue}
                             alt="blue" />
                     </span>
                     <span className='text-shadow z-20'>{initPercentage(5)}</span>
                     <span
-                        className={` transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700  overflow-hidden`}
+                        className={`animate-pulse transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700  overflow-hidden`}
                         style={{
                             width: `${initPercentage(5)}`
                         }}
@@ -160,7 +159,7 @@ function PercentageSection({ percentage }) {
                     </span>
                     <span className='text-shadow z-20'>{initPercentage(3)}</span>
                     <span
-                        className={` transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-pink-900 via-pink-800 to-pink-700 overflow-hidden`}
+                        className={` animate-pulse transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-pink-900 via-pink-800 to-pink-700 overflow-hidden`}
                         style={{
                             width: `${initPercentage(3)}`
                         }}
@@ -193,7 +192,7 @@ function PercentageSection({ percentage }) {
                         </span>
                         <span className='text-shadow z-20'>{initPercentage(1)}</span>
                         <span
-                            className={` transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-orange-900 via-orange-800 to-orange-700 overflow-hidden`}
+                            className={`animate-pulse transition-all left-0 absolute z-10 h-[125px] bg-gradient-to-r from-orange-900 via-orange-800 to-orange-700 overflow-hidden`}
                             style={{
                                 width: `${initPercentage(1)}`
                             }}

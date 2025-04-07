@@ -72,8 +72,6 @@ function App() {
         keySequence = ''
       }
 
-      // console.log(tableResults)
-
       if (
         e.key === "1" ||
         e.key === "2" ||
@@ -145,7 +143,7 @@ function App() {
                 <div className="h-[10%] border-r-4 border-b-4 border-pink-500">
                   <TitleSection />
                 </div>
-                <div className="h-[10%] border-r-4 border-b-4 border-pink-500">
+                <div className="h-[10%] border-r-4 border-b-4 border-pink-500 overflow-hidden flex justify-center relative">
                   <TableInformation />
                 </div>
                 <div className="h-[30%] border-r-4 border-pink-500 overflow-hidden ">
