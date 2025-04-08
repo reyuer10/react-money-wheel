@@ -85,6 +85,28 @@ function App() {
           const response = await fetchDeleteResults()
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
+        } else if (keySequence == 51) {
+          const response = await fetchInsertResults({
+            results_num: 51
+          })
+          setResults(response.tableResults)
+          setPercentage(response.tablePercentage)
+          setResultsPulse(true)
+          setIsModalOpen(true)
+          setCount(0)
+          setFastNumInterval(30);
+          setResultNum(51)
+        } else if (keySequence == 52) {
+          const response = await fetchInsertResults({
+            results_num: 52
+          })
+          setResults(response.tableResults)
+          setPercentage(response.tablePercentage)
+          setResultsPulse(true)
+          setIsModalOpen(true)
+          setCount(0)
+          setFastNumInterval(30);
+          setResultNum(52)
         }
         keySequence = ''
       }
@@ -152,7 +174,7 @@ function App() {
         </div>
         <div className='h-[93%]'>
           <div className='h-full flex w-full'>
-            <div className='text-center border-b-4 border-r-4 border-l-4 border-pink-500 w-[30%]'>
+            <div className='text-center overflow-hidden border-b-4 border-r-4 border-l-4 border-pink-500 w-[30%]'>
               <div>
                 <SideSection
                   setResultsPulse={setResultsPulse}
@@ -165,7 +187,7 @@ function App() {
                 <div className="h-[10%] border-r-4 border-b-4 border-pink-500">
                   <TitleSection />
                 </div>
-                <div className="h-[10%] border-r-4 border-b-4 border-pink-500 overflow-hidden flex justify-center relative">
+                <div className="h-[31%] border-r-4 border-b-4 border-pink-500 overflow-hidden flex justify-center relative">
                   <TableInformation
                     count={count}
                     setCount={setCount}
@@ -175,7 +197,7 @@ function App() {
                 <div className="h-[30%] border-r-4 border-pink-500 overflow-hidden ">
                   <PercentageSection percentage={percentage} />
                 </div>
-                <div className="h-[50%] flex justify-center items-center border-b-4 border-r-4 border-t-4 border-pink-500 ">
+                <div className="h-[30%] flex justify-center items-center border-b-4 border-r-4 border-t-4 border-pink-500 ">
                   <AdvertisementSection />
                 </div>
               </div>

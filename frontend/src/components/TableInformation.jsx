@@ -5,6 +5,7 @@ import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
 import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
+import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 
 function TableInformation({ fastNumInterval, count, setCount }) {
 
@@ -134,26 +135,31 @@ function TableInformation({ fastNumInterval, count, setCount }) {
     }, [fastNumInterval]);
 
     return (
-        <div className='text-[100px] font-bold'>
+        <div className='text-[60px] font-bold'>
             <div className=''>
                 <div className='bg-black w-[50px] h-[50px] z-30 absolute left-[440px] wheel-pointer'>
                 </div>
             </div>
             <div
-                className={`z-10 transition-all h-[1200px] w-[1200px] overflow-hidden rounded-full bg-black flex border-10 border-black relative`}
+                className={`z-10 transition-all h-[920px] w-[920px] overflow-hidden rounded-full bg-black flex border-10 border-black relative`}
                 style={{
                     transform: `rotate(${count}deg)`
                 }}
             >
+                <div className=''>
+                    <div className='bg-white w-[150px] h-[150px] p-4 border-6 border-black rounded-full z-30 absolute left-[43%] top-[44%] flex justify-center items-center'>
+                        <img src={casinoPlusBlack} alt="casinoPlusBlack" />
+                    </div>
+                </div>
                 {num.map((n, index) => {
                     return (
                         <div
                             // border-x-5
                             className={`
-                        wheel-clip-path absolute left-[375px] flex shadow-inner shadow-black  border-white justify-center text-white h-[600px] w-[220px] origin-bottom-right 
+                        wheel-clip-path absolute left-[315px] flex shadow-inner shadow-black  border-white justify-center text-white h-[450px] w-[135px] origin-bottom-right 
                         ${initializeColorBasedOnNum(n.num)}
                         `}
-                            style={{ transform: `rotate(calc(20deg * ${index}))` }}
+                            style={{ transform: `rotate(calc(16.2deg * ${index}))` }}
                             key={index}>
                             <li className=' list-none absolute top-10 z-30 w-[20px] h-[20px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full'></li>
                             <div className="relative top-10 left-3">
@@ -175,6 +181,7 @@ function TableInformation({ fastNumInterval, count, setCount }) {
                                     </div>
                                     : null}
                             </div>
+
                         </div>
                     )
                 })}

@@ -9,9 +9,6 @@ import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 
 function PercentageSection({ percentage }) {
 
-
-    console.log(percentage)
-
     function initPercentage(num) {
         const percentageData = percentage.find((p, index) => p?.resultName == num)
         return percentageData ? percentageData?.calc : '0%'
@@ -22,9 +19,6 @@ function PercentageSection({ percentage }) {
     }
 
 
-    // const redStyleWidth = customizeStringReplace(initPercentage(25))
-
-    console.log()
     return (
         <>
             <div className='text-4xl font-bold grid gap-5 p-4 poppins-extrabold'>
@@ -37,7 +31,7 @@ function PercentageSection({ percentage }) {
                                 src={casinoPlusBlack}
                                 alt="casino-plus-white" />
                         </span>
-                        <span>0%</span>
+                        <span>{initPercentage(51)}</span>
                     </div>
                     <div className=' flex items-center justify-evenly text-center border-6 border-white w-[48%] h-[125px]  m-auto bg-black text-white  rounded-full'>
                         <span className='h-[75px] w-[75px] bg-white text-black flex justify-center items-center rounded-full'>50</span>
@@ -47,7 +41,7 @@ function PercentageSection({ percentage }) {
                                 src={casinoPlusWhite}
                                 alt="casino-plus-white" />
                         </span>
-                        <span>0%</span>
+                        <span>{initPercentage(52)}</span>
                     </div>
 
                 </div>
@@ -55,7 +49,6 @@ function PercentageSection({ percentage }) {
                     <span className='z-30 text-shadow h-[75px] w-[75px] bg-red-600 shadow-md shadow-black text-white flex justify-center items-center rounded-full'>25</span>
                     <span className='z-30'>
                         <img
-                            // 
                             className={`h-[90px] ${customizeRemovePercentage(initPercentage(25)) >= 50 ? 'animate-bounce' : null}`}
                             src={red}
                             alt="rednbata" />
