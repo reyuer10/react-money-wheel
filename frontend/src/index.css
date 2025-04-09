@@ -126,7 +126,7 @@
 }
 
 .wheel-clip-path {
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  clip-path: polygon(100% 0, 0 5%, 100% 100%);
 }
 
 .wheel-pointer {

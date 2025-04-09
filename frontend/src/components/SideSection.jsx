@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { motion } from "motion/react"
 
 import red from "../assets/pictures/red-icon.png"
@@ -10,8 +10,7 @@ import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
 import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 
 
-function SideSection({ resultPulse, setResultsPulse, results }) {
-    console.log(results)
+function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, setIsResultsHide }) {
 
     function customizeColorBasedOnNum(num) {
         if (num == 52) return "bg-black border-6 border-black ring-2 ring-white text-shadow-side-section "
@@ -54,9 +53,6 @@ function SideSection({ resultPulse, setResultsPulse, results }) {
         if (num == 1) return "opacity-70 h-[200px]"
     }
 
-
-
-
     useEffect(() => {
         const timeout = setTimeout(() => {
             setResultsPulse(false)
@@ -65,7 +61,17 @@ function SideSection({ resultPulse, setResultsPulse, results }) {
         return () => {
             clearTimeout(timeout)
         }
-    }, [resultPulse])
+    }, [resultPulse, isResultsHide])
+
+    useEffect(() => {
+        const secondaryTimeout = setTimeout(() => {
+            setIsResultsHide(false)
+        }, 4950);
+
+        return () => {
+            clearTimeout(secondaryTimeout)
+        }
+    }, [isResultsHide])
 
     return (
         <div className='text-4xl font-bold'>
@@ -77,21 +83,15 @@ function SideSection({ resultPulse, setResultsPulse, results }) {
                     >
                         {index == 0 ?
                             <motion.div
-                                initial={{
-                                    opacity: 0,
-                                    x: index == 0 ? -500 : 0,
-                                }}
-                                transition={{
-                                    duration: 1,
-                                }}
-                                animate={{
-                                    opacity: 1,
-                                    x: index == 0 ? 0 : 1,
-                                }}
+                                // animate={{
+                                //     opacity: isResultsHide ? 0 : 1,
+                                //     x: index == 0 ? 0 : 1,
+                                // }}
                                 className={` 
-                                ${resultPulse ? "transition-all animate-pulse neonText" : ""}  
+                                    ${isResultsHide ? "opacity-0" : "opacity-100"}
+                                    ${resultPulse ? "neonText" : ""}
                                 ${customizeColorBasedOnNum(r.results_num)}
-                                relative overflow-hidden text-[142px] text-black h-[240px] justify-center flex items-center m-6 rounded-2xl`}>
+                                 relative overflow-hidden text-[142px] text-black h-[240px] justify-center flex items-center m-6 rounded-2xl`}>
                                 {r.results_num == 51 || r.results_num == 52 ? null : <>
                                     <div className='absolute -top-[250px] -bottom-[40px]'>
                                         <img
@@ -113,11 +113,22 @@ function SideSection({ resultPulse, setResultsPulse, results }) {
                                     <p >{customizeFormatResultNumber(r.results_num)}</p>
                                 </div>
                             </motion.div> :
-                            <div
+                            <motion.div
+                                initial={{
+                                    opacity: 0,
+                                    x: -100
+                                }}
+                                transition={{
+                                    delay: index / 5,
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    x: 0
+                                }}
                                 className={`relative overflow-hidden text-[72px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[120px] flex justify-center items-center m-6 rounded-2xl`}>
                                 {r.results_num == 51 || r.results_num == 52 ?
                                     <img
-                                        className=' h-[50px] w-[150px] relative right-8'
+                                        className=' h-[50px] w-[150px] relative right-5'
                                         src={customizeImageByNum(r.results_num)} alt="character" /> :
                                     <>
                                         <div className='absolute -top-[250px] -bottom-[40px]'>
@@ -132,13 +143,13 @@ function SideSection({ resultPulse, setResultsPulse, results }) {
                                         </div>
                                     </>}
                                 <div className={`
-                                    ${r.results_num == 52 && " bg-white  rounded-full p-3 text-[70px]  "}
+                                    ${r.results_num == 52 && " bg-white rounded-full p-3 text-[70px]  "}
                                     ${r.results_num == 51 && "bg-black rounded-full p-3 text-[70px] text-white"} 
                                      ${r.results_num == 52 || r.results_num == 51 ? "" : "left-20 -top-1"}
                                     z-20 relative   `}>
                                     <p>{customizeFormatResultNumber(r.results_num)}</p>
                                 </div>
-                            </div>
+                            </motion.div>
                         }
                     </motion.div>
                 )
@@ -147,4 +158,4 @@ function SideSection({ resultPulse, setResultsPulse, results }) {
     )
 }
 
-export default SideSection
+export default memo(SideSection)

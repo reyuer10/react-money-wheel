@@ -22,6 +22,7 @@ function App() {
   const [resultNum, setResultNum] = useState(null);
   const [fastNumInterval, setFastNumInterval] = useState(2)
   const [count, setCount] = useState(0);
+  const [isResultsHide, setIsResultsHide] = useState(false);
 
   const handleEnterKeyCode = async (e) => {
     let keyPress = e.key
@@ -37,6 +38,7 @@ function App() {
           setIsModalOpen(true)
           setFastNumInterval(30);
           setResultNum(1)
+          setIsResultsHide(true)
         } else if (keySequence == 2) {
           const response = await fetchInsertResults({
             results_num: 3
@@ -48,6 +50,7 @@ function App() {
           setCount(0)
           setFastNumInterval(30);
           setResultNum(3)
+          setIsResultsHide(true)
         } else if (keySequence == 3) {
           const response = await fetchInsertResults({
             results_num: 5
@@ -59,6 +62,7 @@ function App() {
           setCount(0)
           setFastNumInterval(30);
           setResultNum(5)
+          setIsResultsHide(true)
         } else if (keySequence == 4) {
           const response = await fetchInsertResults({
             results_num: 10
@@ -70,6 +74,7 @@ function App() {
           setCount(0)
           setFastNumInterval(30);
           setResultNum(10)
+          setIsResultsHide(true)
         } else if (keySequence == 5) {
           const response = await fetchInsertResults({
             results_num: 25
@@ -81,6 +86,7 @@ function App() {
           setCount(0)
           setFastNumInterval(30);
           setResultNum(25)
+          setIsResultsHide(true)
         } else if (keySequence == 6) {
           const response = await fetchDeleteResults()
           setResults(response.tableResults)
@@ -96,6 +102,7 @@ function App() {
           setCount(0)
           setFastNumInterval(30);
           setResultNum(51)
+          setIsResultsHide(true)
         } else if (keySequence == 52) {
           const response = await fetchInsertResults({
             results_num: 52
@@ -107,6 +114,7 @@ function App() {
           setCount(0)
           setFastNumInterval(30);
           setResultNum(52)
+          setIsResultsHide(true)
         }
         keySequence = ''
       }
@@ -165,46 +173,54 @@ function App() {
 
     handleFetchGetTableInfo()
   }, []);
-
+  
   return (
-    <div className="h-screen bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
-      <div className='h-full p-4'>
-        <div className=" h-[5%] border-b-4 border-pink-500">
+    <div className={`h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]`}>
+      <div className={`h-full p-4  ${isResultsHide ? " bg-gradient-to-b from-yellow-300/50 via-yellow-300 to-yellow-100/30" : "" }`}>
+        <div className=" h-[5%] ">
           <Header />
         </div>
         <div className='h-[93%]'>
           <div className='h-full flex w-full'>
-            <div className='text-center overflow-hidden border-b-4 border-r-4 border-l-4 border-pink-500 w-[30%]'>
-              <div>
+            <div className='text-center overflow-hidden w-[30%]'>
+              <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
                 <SideSection
+                  setIsResultsHide={setIsResultsHide}
+                  isResultsHide={isResultsHide}
                   setResultsPulse={setResultsPulse}
                   resultPulse={resultPulse}
                   results={results} />
               </div>
             </div>
-            <div className=' w-[70%]'>
+            <div className=' w-[70%] '>
               <div className='h-full'>
-                <div className="h-[10%] border-r-4 border-b-4 border-pink-500">
-                  <TitleSection />
+                <div className="h-[10%]">
+                  <div className=''>
+                    <TitleSection />
+                  </div>
                 </div>
-                <div className="h-[31%] border-r-4 border-b-4 border-pink-500 overflow-hidden flex justify-center relative">
+                <div className="h-[31%]  overflow-hidden flex justify-center relative">
                   <TableInformation
                     count={count}
                     setCount={setCount}
                     fastNumInterval={fastNumInterval}
                   />
                 </div>
-                <div className="h-[30%] border-r-4 border-pink-500 overflow-hidden ">
-                  <PercentageSection percentage={percentage} />
+                <div className="h-[30%] overflow-hidden ">
+                  <div className='bg-white/30 rounded-3xl m-4 mx-6'>
+                    <PercentageSection percentage={percentage} />
+                  </div>
                 </div>
-                <div className="h-[30%] flex justify-center items-center border-b-4 border-r-4 border-t-4 border-pink-500 ">
-                  <AdvertisementSection />
+                <div className="h-[29%] flex justify-center items-center ">
+                  <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl m-4 mx-6 p-4 h-[97%] w-full flex justify-center items-center overflow-hidden'>
+                    <AdvertisementSection />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="h-[2%] ">
+        <div className="h-[2%] w-full relative">
           <Footer />
         </div>
       </div>

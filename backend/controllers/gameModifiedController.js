@@ -52,7 +52,7 @@ exports.getTableInfo = async (req, res) => {
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(0) + "%",
+          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
         })
       );
       return newArr;
@@ -103,6 +103,7 @@ exports.postResults = async (req, res) => {
     const latestResultsId = getLatestResultsId[0]?.maxResults_id;
     const calculateStartIndex = tableTotalLength - tableResultsMin;
     const newStartIndex = calculateStartIndex <= 0 ? 1 : calculateStartIndex;
+    console.log(calculateStartIndex);
 
     const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc);
 
@@ -123,7 +124,7 @@ exports.postResults = async (req, res) => {
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(0) + "%",
+          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
         })
       );
       return newArr;
@@ -203,7 +204,7 @@ exports.deleteResults = async (req, res) => {
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(0) + "%",
+          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
         })
       );
       return newArr;
