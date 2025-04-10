@@ -47,7 +47,7 @@ function AdvertisementSection() {
             if (imageIndex == 4) {
                 setImageIndex(0)
             }
-        }, 10000);
+        }, 5000);
         return () => {
             clearInterval(interval)
         }
@@ -66,16 +66,8 @@ function AdvertisementSection() {
 
 
 
-    const formatSequenceImage = slider[imageIndex - 1]?.sliderImage < 0 ? slider[imageIndex]?.sliderImage : slider[imageIndex - 1]?.sliderImage
-    console.log(imageIndex)
     return (
-        <div className='flex space-x-4'>
-            {/* {slider.map((s, index) => {
-                return (
-               
-                )
-            })} */}
-
+        <div className='flex space-x-4 relative'>
             <motion.div
                 initial={{
                     opacity: 0
@@ -83,7 +75,6 @@ function AdvertisementSection() {
                 transition={{
                     duration: 0.5,
                     ease: "easeInOut"
-                    // delay: 1
                 }}
 
                 animate={{
@@ -92,11 +83,19 @@ function AdvertisementSection() {
                 }}
                 className='text-black flex justify-center items-center font-bold text-4xl'>
                 <img
-                    className='h-[60%] shadow-2xl shadow-white'
+                    className='h-[80%] shadow-2xl shadow-white'
                     src={slider[imageIndex]?.sliderImage}
                     alt="ads_cur" />
 
             </motion.div>
+            {/* <div className=''>
+            </div>
+            <div>
+
+            </div>
+            <div>
+
+            </div> */}
         </div>
     )
 }

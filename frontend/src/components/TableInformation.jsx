@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
+
 import red from "../assets/pictures/red-icon.png"
 import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
@@ -8,7 +9,6 @@ import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
 
 function TableInformation({ fastNumInterval, count, setCount }) {
-
 
     const [num, setNum] = useState([
         {
@@ -124,34 +124,73 @@ function TableInformation({ fastNumInterval, count, setCount }) {
         },
     ])
 
+    const [numColor, setNumColor] = useState([
+        {
+            numberId: 0,
+            number: 1,
+            numberColorBackground: "bg-orange-500",
+            numberImage: white,
+            numBorderStyle: "bg-orange-600 rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+        {
+            numberId: 1,
+            number: 3,
+            numberColorBackground: "bg-pink-500",
+            numberImage: pink,
+            numBorderStyle: "bg-pink-600 rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+        {
+            numberId: 2,
+            number: 5,
+            numberColorBackground: "bg-blue-500",
+            numberImage: blue,
+            numBorderStyle: "bg-blue-600 rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+        {
+            numberId: 3,
+            number: 10,
+            numberColorBackground: "bg-yellow-500",
+            numberImage: yellow,
+            numBorderStyle: "bg-yellow-600 rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+        {
+            numberId: 4,
+            number: 25,
+            numberColorBackground: "bg-red-500",
+            numberImage: red,
+            numBorderStyle: "bg-red-600 rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+        {
+            numberId: 5,
+            number: 51,
+            numberColorBackground: "bg-black",
+            numberImage: null,
+            numBorderStyle: "text-black bg-white rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+        {
+            numberId: 6,
+            number: 52,
+            numberColorBackground: "bg-white",
+            numberImage: null,
+            numBorderStyle: "bg-black rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
+        },
+
+    ])
+
+
+
 
     function initializeColorBasedOnNum(num) {
-        if (num == 52) return "bg-white"
-        if (num == 51) return "bg-black"
-        if (num == 25) return "bg-red-500"
-        if (num == 10) return "bg-yellow-500"
-        if (num == 5) return "bg-blue-500"
-        if (num == 3) return "bg-pink-500"
-        if (num == 1) return "bg-orange-500"
+        return numColor.find(n => n.number == num)?.numberColorBackground
     }
 
     function CustomizeColorBorderBasedOnNum(num) {
-        if (num == 52) return "bg-black rounded-full h-[80px] w-[80px] flex justify-center items-center"
-        if (num == 51) return "text-black  bg-white rounded-full h-[80px] w-[80px] flex justify-center items-center"
-        if (num == 25) return "bg-red-600 rounded-full h-[80px] w-[80px] flex justify-center items-center"
-        if (num == 10) return "bg-yellow-600 rounded-full h-[80px] w-[80px] flex justify-center items-center"
-        if (num == 5) return "bg-blue-600 rounded-full h-[80px] w-[80px] flex justify-center items-center"
-        if (num == 3) return "bg-pink-600 rounded-full h-[80px] w-[80px] flex justify-center items-center"
-        if (num == 1) return "bg-orange-600 rounded-full h-[80px] w-[80px] flex justify-center items-center"
+        return numColor.find(n => n.number == num)?.numBorderStyle
     }
 
 
     function initializeImageBasedOnNum(num) {
-        if (num == 25) return red
-        if (num == 10) return yellow
-        if (num == 5) return blue
-        if (num == 3) return pink
-        if (num == 1) return white
+        return numColor.find(n => n.number == num)?.numberImage
     }
 
 
@@ -170,40 +209,36 @@ function TableInformation({ fastNumInterval, count, setCount }) {
 
     return (
         <div className='text-[45px] font-bold'>
-            <div className='bg-pink-500 shadow-md shadow-black rotate-4 w-[80px] h-[80px] z-30 absolute left-[465px] wheel-pointer'>
+            <div className='bg-pink-500 shadow-md shadow-black w-[80px] h-[80px] z-30 absolute left-[450px] wheel-pointer'>
             </div>
             <div
-                className={`z-10 transition-all h-[920px] w-[920px] overflow-hidden rounded-full bg-black flex border-10 border-pink-500 relative`}
+                className={`z-10 transition-all h-[920px] w-[920px] shadow-2xl shadow-pink-500 overflow-hidden rounded-full bg-black flex border-10 border-pink-500 relative`}
                 style={{
                     transform: `rotate(${count}deg)`
                 }}
             >
-                <div>
-                    <div className='bg-white w-[150px] h-[150px] p-4 border-6 border-black rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
-                        <img src={casinoPlusBlack} alt="casinoPlusBlack" />
-                    </div>
+                <div className='bg-white w-[150px] h-[150px] -rotate-27 p-4 border-6 border-pink-500 ring-4 ring-pink-700 rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
+                    <img src={casinoPlusBlack} alt="casinoPlusBlack" />
                 </div>
                 {num.map((n, index) => {
                     return (
                         <div
                             className={`
-                        wheel-clip-path absolute left-[315px] bottom-[50%] flex shadow-inner shadow-black  border-white justify-center text-white h-[470px] w-[135px] origin-bottom-right 
+                        wheel-clip-path absolute left-[315px] bottom-[50%] flex border-white justify-center text-white h-[470px] w-[135px] origin-bottom-right 
                         ${initializeColorBasedOnNum(n.inputNum)}
                         `}
                             style={{ transform: `rotate(calc(16.2deg * ${index}))` }}
                             key={index}>
-                            <li className=' list-none absolute top-7 z-30 w-[15px] h-[15px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full'></li>
-                            <li className=' list-none absolute top-10 left-3 z-30 w-[15px] h-[15px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full'></li>
-                            <li className=' list-none absolute top-6 right-3 z-30 w-[15px] h-[15px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full'></li>
+                            <li className={`list-none absolute top-8 left-8 z-30 w-[15px] h-[15px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full`}></li>
+                            <li className={`
+                                ${n.inputNum == 51 ? "right-2" : "right-8 "}
+                                list-none absolute top-6 z-30 w-[15px] h-[15px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full`}></li>
                             <div className="relative top-10 left-2">
-                                <p className={`-rotate-10 text-shadow ${CustomizeColorBorderBasedOnNum(n.inputNum)}`}>
+                                <p className={`-rotate-10 text-shadow
+                                    ${n.inputNum == 51 ? "relative left-3" : ""}
+                                    ${CustomizeColorBorderBasedOnNum(n.inputNum)}`}>
                                     {n.num}
                                 </p>
-                                {/* {n.num == 50 ? null : <img
-                                    className=''
-                                    src={initializeImageBasedOnNum(n.num)}
-                                    alt="image-character"
-                                />} */}
                                 {n.inputNum == 51 ?
                                     <div className='relative -rotate-10 left-6 top-5'>
                                         <img
@@ -232,4 +267,4 @@ function TableInformation({ fastNumInterval, count, setCount }) {
     )
 }
 
-export default TableInformation
+export default memo(TableInformation)

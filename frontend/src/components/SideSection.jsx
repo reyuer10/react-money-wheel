@@ -44,7 +44,6 @@ function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, set
     }
 
     function customizeImageSizeByNum(num) {
-        if (num == 52) return 50
         if (num == 51) return "opacity-70 h-[50px] w-[150px]"
         if (num == 25) return "opacity-70 h-[200px]"
         if (num == 10) return "opacity-70 h-[200px]"
@@ -77,16 +76,9 @@ function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, set
         <div className='text-4xl font-bold'>
             {results.map((r, index) => {
                 return (
-                    <motion.div
-                        key={index}
-                        className=""
-                    >
+                    <div key={index}>
                         {index == 0 ?
                             <motion.div
-                                // animate={{
-                                //     opacity: isResultsHide ? 0 : 1,
-                                //     x: index == 0 ? 0 : 1,
-                                // }}
                                 className={` 
                                     ${isResultsHide ? "opacity-0" : "opacity-100"}
                                     ${resultPulse ? "neonText" : ""}
@@ -146,12 +138,12 @@ function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, set
                                     ${r.results_num == 52 && " bg-white rounded-full p-3 text-[70px]  "}
                                     ${r.results_num == 51 && "bg-black rounded-full p-3 text-[70px] text-white"} 
                                      ${r.results_num == 52 || r.results_num == 51 ? "" : "left-20 -top-1"}
-                                    z-20 relative   `}>
+                                    z-20 relative`}>
                                     <p>{customizeFormatResultNumber(r.results_num)}</p>
                                 </div>
                             </motion.div>
                         }
-                    </motion.div>
+                    </div>
                 )
             })}
         </div>

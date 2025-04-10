@@ -173,11 +173,11 @@ function App() {
 
     handleFetchGetTableInfo()
   }, []);
-  
+
   return (
-    <div className={`h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]`}>
-      <div className={`h-full p-4  ${isResultsHide ? " bg-gradient-to-b from-yellow-300/50 via-yellow-300 to-yellow-100/30" : "" }`}>
-        <div className=" h-[5%] ">
+    <div className="h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
+      <div className="h-full p-4">
+        <div className=" h-[5%]">
           <Header />
         </div>
         <div className='h-[93%]'>
@@ -194,11 +194,11 @@ function App() {
             </div>
             <div className=' w-[70%] '>
               <div className='h-full'>
-                <div className="h-[10%]">
+                {/* <div className="h-[10%]">
                   <div className=''>
                     <TitleSection />
                   </div>
-                </div>
+                </div> */}
                 <div className="h-[31%]  overflow-hidden flex justify-center relative">
                   <TableInformation
                     count={count}
@@ -211,7 +211,7 @@ function App() {
                     <PercentageSection percentage={percentage} />
                   </div>
                 </div>
-                <div className="h-[29%] flex justify-center items-center ">
+                <div className="h-[39%] flex justify-center items-center ">
                   <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl m-4 mx-6 p-4 h-[97%] w-full flex justify-center items-center overflow-hidden'>
                     <AdvertisementSection />
                   </div>
@@ -232,7 +232,6 @@ function App() {
       </ModalResults>
     </div>
   );
-
 }
 
 export default App
