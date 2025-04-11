@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo, useCallback } from 'react'
 import red from "../assets/pictures/red-icon.png"
 import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
@@ -9,10 +9,10 @@ import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 
 function PercentageSection({ percentage }) {
 
-    function initPercentage(num) {
+    const initPercentage = useCallback((num) => {
         const percentageData = percentage.find((p, index) => p?.resultName == num)
         return percentageData ? percentageData?.calc : '0%'
-    }
+    }, [percentage])
 
     function customizeRemovePercentage(func) {
         return String(func).replace("%", '')
@@ -213,4 +213,4 @@ function PercentageSection({ percentage }) {
     )
 }
 
-export default PercentageSection
+export default memo(PercentageSection)

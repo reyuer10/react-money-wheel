@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 import { motion } from 'motion/react'
 
 import red from "../assets/pictures/red-icon.png"
@@ -9,16 +9,13 @@ import white from "../assets/pictures/orangeIcon.png"
 
 
 
-function ResultsWinningSection({ resultNumber, percentage }) {
+function ResultsWinningSection({ resultNumber }) {
     const [countNum, setCountNum] = useState(0)
-    function findWinningNumPercentage() {
-        const percentageData = percentage.find((p, index) => p?.resultName == resultNumber);
-        const percentageNumToString = String(percentageData?.calc).replace("%", "")
-        return percentageData ? percentageNumToString : null
-    }
 
 
-    const [numData, setNumData] = useState([
+
+
+    const numData = useMemo(() => ([
         {
             numberId: 0,
             number: 1,
@@ -68,41 +65,25 @@ function ResultsWinningSection({ resultNumber, percentage }) {
             numImage: null,
             numFormat: 50,
         },
-    ])
+    ]), [])
 
-    useEffect(() => {
-        let intervalId;
-
-        intervalId = setInterval(() => {
-            setCountNum(prevCountNum => prevCountNum + 1)
-        }, 1);
-
-        if (countNum >= findWinningNumPercentage()) {
-            clearInterval(intervalId)
-        }
-
-        return () => {
-            clearInterval(intervalId)
-        }
-    }, [countNum]);
-
-    function customizeImageBasedOnNum(num) {
+    const customizeImageBasedOnNum = useCallback((num) => {
         return numData.find(n => n.number == num)?.numImage
-    }
+    }, [numData])
 
-    function customizeColorBasedOnNum(num) {
+    const customizeColorBasedOnNum = useCallback((num) => {
         return numData.find(n => n.number == num)?.numCustomizeBackgroundColor
-    }
+    }, [numData])
 
 
-    function customizeFormatBasedOnNum(num) {
+    const customizeFormatBasedOnNum = useCallback((num) => {
         if (num == 51 || num == 52) return 50
         if (num == 25) return 25
         if (num == 10) return 10
         if (num == 5) return 5
         if (num == 3) return 3
         if (num == 1) return 1
-    }
+    }, [])
 
 
 
@@ -140,4 +121,4 @@ function ResultsWinningSection({ resultNumber, percentage }) {
     )
 }
 
-export default ResultsWinningSection
+export default memo(ResultsWinningSection)

@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react'
+import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
 
 import red from "../assets/pictures/red-icon.png"
 import blue from "../assets/pictures/blueIcon.png"
@@ -10,7 +10,7 @@ import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
 
 function TableInformation({ fastNumInterval, count, setCount }) {
 
-    const [num, setNum] = useState([
+    const num = useMemo(() => [
         {
             idNum: 1,
             num: 25,
@@ -122,9 +122,9 @@ function TableInformation({ fastNumInterval, count, setCount }) {
             num: 50,
             inputNum: 51,
         },
-    ])
+    ], [])
 
-    const [numColor, setNumColor] = useState([
+    const numColor = useMemo(() => [
         {
             numberId: 0,
             number: 1,
@@ -175,25 +175,19 @@ function TableInformation({ fastNumInterval, count, setCount }) {
             numBorderStyle: "bg-black rounded-full h-[80px] w-[80px] shadow-md shadow-black flex justify-center items-center",
         },
 
-    ])
+    ]
+        , [])
 
 
 
 
-    function initializeColorBasedOnNum(num) {
+    const initializeColorBasedOnNum = useCallback((num) => {
         return numColor.find(n => n.number == num)?.numberColorBackground
-    }
+    }, [])
 
-    function CustomizeColorBorderBasedOnNum(num) {
+    const CustomizeColorBorderBasedOnNum = useCallback((num) => {
         return numColor.find(n => n.number == num)?.numBorderStyle
-    }
-
-
-    function initializeImageBasedOnNum(num) {
-        return numColor.find(n => n.number == num)?.numberImage
-    }
-
-
+    }, [])
 
 
     useEffect(() => {
@@ -211,20 +205,22 @@ function TableInformation({ fastNumInterval, count, setCount }) {
         <div className='text-[45px] font-bold'>
             <div className='bg-pink-500 shadow-md shadow-black w-[80px] h-[80px] z-30 absolute left-[450px] wheel-pointer'>
             </div>
+            
+            {/*  */}
             <div
-                className={`z-10 transition-all h-[920px] w-[920px] shadow-2xl shadow-pink-500 overflow-hidden rounded-full bg-black flex border-10 border-pink-500 relative`}
+                className={` transition-all h-[920px] w-[920px] overflow-hidden shadow-2xl shadow-pink-500 rounded-full bg-black border-10 border-pink-500 relative`}
                 style={{
                     transform: `rotate(${count}deg)`
                 }}
             >
-                <div className='bg-white w-[150px] h-[150px] -rotate-27 p-4 border-6 border-pink-500 ring-4 ring-pink-700 rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
+                <div className='bg-white w-[150px] h-[150px]  -rotate-27 p-4 border-6 border-pink-500 ring-4 ring-pink-700 rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
                     <img src={casinoPlusBlack} alt="casinoPlusBlack" />
                 </div>
                 {num.map((n, index) => {
                     return (
                         <div
                             className={`
-                        wheel-clip-path absolute left-[315px] bottom-[50%] flex border-white justify-center text-white h-[470px] w-[135px] origin-bottom-right 
+                        wheel-clip-path absolute  left-[315px] bottom-[50%] flex border-white justify-center text-white h-[470px] w-[135px] origin-bottom-right 
                         ${initializeColorBasedOnNum(n.inputNum)}
                         `}
                             style={{ transform: `rotate(calc(16.2deg * ${index}))` }}

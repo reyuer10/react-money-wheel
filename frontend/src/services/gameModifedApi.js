@@ -1,22 +1,28 @@
 import axios from "axios";
 
-const fetchGetResults = async () => {
-  try {
-    const response = await axios.get(
-      "http://localhost:3000/api/moneywheel/GET/table/info"
-    );
+const localHost = import.meta.env.VITE_localhost;
+const api = import.meta.env.VITE_api;
+const getTableInfo = import.meta.env.VITE_GET_TABLE_INFO;
+const postTableResults = import.meta.env.VITE_POST_TABLE_RESULT;
+const deleteTableResults = import.meta.env.VITE_DELETE_TABLE_RESULT;
 
+const fetchGetResults = async (table_name) => {
+  try {
+    const response = await axios.post(
+      `${localHost}/${api}/${getTableInfo}?tableName=${table_name}`
+    );
     return response.data;
   } catch (error) {
     throw error;
   }
 };
 
-const fetchInsertResults = async ({ results_num }) => {
+const fetchInsertResults = async ({ table_name, results_num }) => {
   try {
     const response = await axios.post(
-      "http://localhost:3000/api/moneywheel/POST/table/insert",
+      `${localHost}/${api}/${postTableResults}`,
       {
+        table_name: table_name,
         results_num: results_num,
       }
     );
@@ -30,9 +36,8 @@ const fetchInsertResults = async ({ results_num }) => {
 const fetchDeleteResults = async () => {
   try {
     const response = await axios.delete(
-      "http://localhost:3000/api/moneywheel/DELETE/table/delete"
+      `${localHost}/${api}/${deleteTableResults}`
     );
-
     return response.data;
   } catch (error) {
     throw error;

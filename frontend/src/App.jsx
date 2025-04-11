@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Header from './components/header'
-import Footer from './components/footer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 import SideSection from './components/SideSection'
 import TitleSection from './components/TitleSection'
 import PercentageSection from './components/PercentageSection'
@@ -9,11 +9,16 @@ import TableInformation from './components/TableInformation'
 import { fetchDeleteResults, fetchGetResults, fetchInsertResults } from './services/gameModifedApi'
 import ModalResults from './modal/ModalResults'
 import ResultsWinningSection from './components/ResultsWinningSection'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import moneyWheelLogo from "./assets/pictures/money_wheel_logo.png"
 
 
 
 
 function App() {
+  const location = useLocation()
+  const locationTableName = location.pathname
+  const tableName = String(locationTableName).split("=").at(1)
   let keySequence = ''
   const [results, setResults] = useState([]);
   const [percentage, setPercentage] = useState([]);
@@ -23,6 +28,7 @@ function App() {
   const [fastNumInterval, setFastNumInterval] = useState(2)
   const [count, setCount] = useState(0);
   const [isResultsHide, setIsResultsHide] = useState(false);
+  const [tableInfo, setTableInfo] = useState([])
 
   const handleEnterKeyCode = async (e) => {
     let keyPress = e.key
@@ -30,6 +36,7 @@ function App() {
       if (e.key === "Enter") {
         if (keySequence == 1) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 1
           })
           setResults(response.tableResults);
@@ -41,6 +48,7 @@ function App() {
           setIsResultsHide(true)
         } else if (keySequence == 2) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 3
           })
           setResults(response.tableResults)
@@ -53,6 +61,7 @@ function App() {
           setIsResultsHide(true)
         } else if (keySequence == 3) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 5
           })
           setResults(response.tableResults)
@@ -65,6 +74,7 @@ function App() {
           setIsResultsHide(true)
         } else if (keySequence == 4) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 10
           })
           setResults(response.tableResults)
@@ -77,6 +87,7 @@ function App() {
           setIsResultsHide(true)
         } else if (keySequence == 5) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 25
           })
           setResults(response.tableResults)
@@ -93,6 +104,7 @@ function App() {
           setPercentage(response.tablePercentage)
         } else if (keySequence == 51) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 51
           })
           setResults(response.tableResults)
@@ -105,6 +117,7 @@ function App() {
           setIsResultsHide(true)
         } else if (keySequence == 52) {
           const response = await fetchInsertResults({
+            table_name: tableName,
             results_num: 52
           })
           setResults(response.tableResults)
@@ -158,14 +171,13 @@ function App() {
 
 
 
-
   useEffect(() => {
     const handleFetchGetTableInfo = async () => {
       try {
-        const response = await fetchGetResults();
-        // console.log(response)
+        const response = await fetchGetResults(tableName);
         setResults(response.tableResults)
         setPercentage(response.tablePercentage)
+        setTableInfo(response.tableInfo)
       } catch (error) {
         console.log(error)
       }
@@ -175,87 +187,70 @@ function App() {
   }, []);
 
   return (
-    <div className="h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
-      <div className="h-full p-4">
-        <div className=" h-[5%]">
-          <Header />
+    <Routes>
+      <Route path={`tableName=${tableName}`} element={tableInfo.length <= 0 ?
+        <div className='h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)] space-y-10 flex flex-col justify-center items-center'>
+          <img
+            className='h-[200px]'
+            src={moneyWheelLogo}
+            alt="money_wheel_logo" />
+          <p className='text-[72px] font-bold text-white text-shadow'>NO TABLE FOUND</p>
         </div>
-        <div className='h-[93%]'>
-          <div className='h-full flex w-full'>
-            <div className='text-center overflow-hidden w-[30%]'>
-              <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
-                <SideSection
-                  setIsResultsHide={setIsResultsHide}
-                  isResultsHide={isResultsHide}
-                  setResultsPulse={setResultsPulse}
-                  resultPulse={resultPulse}
-                  results={results} />
+        :
+        <div className="h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
+          <div className="h-full p-4">
+            <div className=" h-[5%]">
+              <Header tableInfo={tableInfo} />
+            </div>
+            <div className='h-[93%]'>
+              <div className='h-full flex w-full'>
+                <div className='text-center overflow-hidden w-[30%]'>
+                  <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
+                    <SideSection
+                      setIsResultsHide={setIsResultsHide}
+                      isResultsHide={isResultsHide}
+                      setResultsPulse={setResultsPulse}
+                      resultPulse={resultPulse}
+                      results={results} />
+                  </div>
+                </div>
+                <div className='w-[70%] '>
+                  <div className='h-full'>
+                    <div className="h-[31%]  overflow-hidden flex justify-center relative">
+                      <TableInformation
+                        count={count}
+                        setCount={setCount}
+                        fastNumInterval={fastNumInterval}
+                      />
+                    </div>
+                    <div className="h-[30%] overflow-hidden ">
+                      <div className='bg-white/30 rounded-3xl m-4 mx-6'>
+                        <PercentageSection percentage={percentage} />
+                      </div>
+                    </div>
+                    <div className="h-[39%] flex justify-center items-center ">
+                      <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl mx-6 h-[97%] w-full flex justify-center items-center overflow-hidden'>
+                        <AdvertisementSection />
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className=' w-[70%] '>
-              <div className='h-full'>
-                {/* <div className="h-[10%]">
-                  <div className=''>
-                    <TitleSection />
-                  </div>
-                </div> */}
-                <div className="h-[31%]  overflow-hidden flex justify-center relative">
-                  <TableInformation
-                    count={count}
-                    setCount={setCount}
-                    fastNumInterval={fastNumInterval}
-                  />
-                </div>
-                <div className="h-[30%] overflow-hidden ">
-                  <div className='bg-white/30 rounded-3xl m-4 mx-6'>
-                    <PercentageSection percentage={percentage} />
-                  </div>
-                </div>
-                <div className="h-[39%] flex justify-center items-center ">
-                  <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl m-4 mx-6 p-4 h-[97%] w-full flex justify-center items-center overflow-hidden'>
-                    <AdvertisementSection />
-                  </div>
-                </div>
-              </div>
+            <div className="h-[2%] w-full relative">
+              <Footer />
             </div>
           </div>
+          <ModalResults isModalOpen={isModalOpen}>
+            <ResultsWinningSection
+              resultNumber={resultNum}
+            />
+          </ModalResults>
         </div>
-        <div className="h-[2%] w-full relative">
-          <Footer />
-        </div>
-      </div>
-      <ModalResults isModalOpen={isModalOpen}>
-        <ResultsWinningSection
-          resultNumber={resultNum}
-          percentage={percentage}
-        />
-      </ModalResults>
-    </div>
+      } />
+    </Routes>
+
   );
 }
 
 export default App
-
-{/* <div className="h-screen grid p-4 grid-cols-12 grid-rows-[100px_auto]">
-<div className="border col-span-12">
-  <Header />
-</div>
-<div className="border col-span-5 row-span-12">
-  <SideSection />
-</div>
-<div className="border col-span-7 row-span-1">
-  <TitleSection />
-</div>
-<div className="border col-span-7 row-span-1">
-  <TableInformation />
-</div>
-<div className="border col-span-7 row-span-5">
-  <PercentageSection />
-</div>
-<div className="border col-span-7 row-span-5">
-  <AdvertisementSection />
-</div>
-<div className="border col-span-12">
-  <Footer />
-</div>
-</div> */}

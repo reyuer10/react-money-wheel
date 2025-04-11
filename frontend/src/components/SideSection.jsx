@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import { motion } from "motion/react"
 
 import red from "../assets/pictures/red-icon.png"
@@ -10,9 +10,15 @@ import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
 import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 
 
-function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, setIsResultsHide }) {
+function SideSection({
+    resultPulse,
+    setResultsPulse,
+    results,
+    isResultsHide,
+    setIsResultsHide
+}) {
 
-    function customizeColorBasedOnNum(num) {
+    const customizeColorBasedOnNum = useCallback((num) => {
         if (num == 52) return "bg-black border-6 border-black ring-2 ring-white text-shadow-side-section "
         if (num == 51) return "bg-white border-6 border-black ring-2 ring-white text-shadow-side-section"
         if (num == 25) return "bg-gradient-to-r from-red-500 via-red-700 to-red-900 text-white text-shadow-side-section border-4 border-red-200 shadow-xl shadow-red-700"
@@ -20,10 +26,9 @@ function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, set
         if (num == 5) return " bg-gradient-to-r from-blue-500 via-blue-700 to-blue-900 bg-blue-600 text-white text-shadow-side-section border-4 border-blue-200 shadow-xl shadow-blue-700"
         if (num == 3) return "bg-gradient-to-r from-pink-500 via-pink-700 to-pink-900 text-white text-shadow-side-section border-4 border-pink-200 shadow-xl shadow-pink-700"
         if (num == 1) return "bg-gradient-to-r from-orange-500 via-orange-600 to-orange-900 text-white text-shadow-side-section border-4 border-orange-200 shadow-xl shadow-orange-700"
-    }
+    }, [])
 
-
-    function customizeImageByNum(num) {
+    const customizeImageByNum = useCallback((num) => {
         if (num == 52) return casinoPlusWhite
         if (num == 51) return casinoPlusBlack
         if (num == 25) return red
@@ -31,9 +36,9 @@ function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, set
         if (num == 5) return blue
         if (num == 3) return pink
         if (num == 1) return white
-    }
+    }, [])
 
-    function customizeFormatResultNumber(num) {
+    const customizeFormatResultNumber = useCallback((num) => {
         if (num == 52) return 50
         if (num == 51) return 50
         if (num == 25) return 25
@@ -41,16 +46,16 @@ function SideSection({ resultPulse, setResultsPulse, results, isResultsHide, set
         if (num == 5) return 5
         if (num == 3) return 3
         if (num == 1) return 1
-    }
+    }, [])
 
-    function customizeImageSizeByNum(num) {
+    const customizeImageSizeByNum = useCallback((num) => {
         if (num == 51) return "opacity-70 h-[50px] w-[150px]"
         if (num == 25) return "opacity-70 h-[200px]"
         if (num == 10) return "opacity-70 h-[200px]"
         if (num == 5) return "opacity-70 h-[200px]"
         if (num == 3) return "opacity-70 h-[200px]"
         if (num == 1) return "opacity-70 h-[200px]"
-    }
+    }, [])
 
     useEffect(() => {
         const timeout = setTimeout(() => {

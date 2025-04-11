@@ -4,7 +4,7 @@ const OK = 200;
 const InternalServer = 500;
 
 exports.getTableInfo = async (req, res) => {
-  const queryGetTableInfo = "SELECT * FROM tb_table";
+  const queryGetTableInfo = "SELECT * FROM tb_table WHERE table_name = ?";
   const queryGetTableResults =
     "SELECT * FROM tb_results order by results_id desc";
 
@@ -19,6 +19,10 @@ exports.getTableInfo = async (req, res) => {
   const queryGetResultCount =
     "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
 
+  const {
+    query: { tableName },
+  } = req;
+
   try {
     const tableResultsMin = 20;
     const getResultsCount = await databaseQuery(queryGetResultCount);
@@ -26,7 +30,7 @@ exports.getTableInfo = async (req, res) => {
       queryGetMinMaxTableResultCount
     );
     const latestResultsId = getLatestResultsId[0]?.maxResults_id;
-    const getTableInfo = await databaseQuery(queryGetTableInfo);
+    const getTableInfo = await databaseQuery(queryGetTableInfo, [tableName]);
     const getTableResults = await databaseQuery(queryGetTableResults);
     const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc);
     const tableTotalLength = getTableResults.length;
@@ -73,7 +77,7 @@ exports.getTableInfo = async (req, res) => {
 
 exports.postResults = async (req, res) => {
   const queryInsertResults =
-    "INSERT INTO tb_results(`results_num`, `results_created`) VALUE(?, NOW())";
+    "INSERT INTO tb_results(`results_table`, `results_num`, `results_created`) VALUE(?, ?, NOW())";
   const queryGetTableResults =
     "SELECT * FROM tb_results order by results_id desc";
 
@@ -89,11 +93,11 @@ exports.postResults = async (req, res) => {
     "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   const {
-    body: { results_num },
+    body: { table_name, results_num },
   } = req;
   try {
     const tableResultsMin = 20;
-    await databaseQuery(queryInsertResults, [results_num]);
+    await databaseQuery(queryInsertResults, [table_name, results_num]);
 
     const getTableResults = await databaseQuery(queryGetTableResults);
     const tableTotalLength = getTableResults.length;
@@ -103,7 +107,6 @@ exports.postResults = async (req, res) => {
     const latestResultsId = getLatestResultsId[0]?.maxResults_id;
     const calculateStartIndex = tableTotalLength - tableResultsMin;
     const newStartIndex = calculateStartIndex <= 0 ? 1 : calculateStartIndex;
-    console.log(calculateStartIndex);
 
     const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc);
 
