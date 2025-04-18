@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useContext, useMemo, useState } from 'react'
 import { motion } from 'motion/react'
 
 import red from "../assets/pictures/red-icon.png"
@@ -6,10 +6,12 @@ import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
 import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
+import { MoneyWheelContext } from '../App'
 
 
 
-function ResultsWinningSection({ resultNumber }) {
+function ResultsWinningSection() {
+    const { resultNum } = useContext(MoneyWheelContext)
     const [countNum, setCountNum] = useState(0)
 
 
@@ -99,22 +101,22 @@ function ResultsWinningSection({ resultNumber }) {
                     y: -1900,
                     scale: 0.2,
                 }}
-                className={`${customizeColorBasedOnNum(resultNumber)}
+                className={`${customizeColorBasedOnNum(resultNum)}
                  rounded-3xl flex justify-evenly items-center text-white text-[300px] poppins-black text-shadow h-[500px] w-[800px] overflow-hidden
                  `}>
-                {resultNumber == 51 || resultNumber == 52 ? null : <>
+                {resultNum == 51 || resultNum == 52 ? null : <>
                     <img
                         className='h-[60%] z-20'
-                        src={customizeImageBasedOnNum(resultNumber)}
+                        src={customizeImageBasedOnNum(resultNum)}
                         alt="image_character"
                     />
                 </>}
 
                 <p className={`
-                    ${resultNumber == 51 && "bg-black rounded-full"}
-                    ${resultNumber == 52 && "text-black bg-white rounded-full"}
+                    ${resultNum == 51 && "bg-black rounded-full"}
+                    ${resultNum == 52 && "text-black bg-white rounded-full"}
                     z-20 px-6`}>
-                    {customizeFormatBasedOnNum(resultNumber)}
+                    {customizeFormatBasedOnNum(resultNum)}
                 </p>
             </motion.div>
         </div>

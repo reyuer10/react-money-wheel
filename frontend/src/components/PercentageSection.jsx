@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useContext } from 'react'
 import red from "../assets/pictures/red-icon.png"
 import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
@@ -6,8 +6,10 @@ import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
 import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
 import casinoPlusBlack from "../assets/pictures/casino-logo.png"
+import { MoneyWheelContext } from '../App'
 
-function PercentageSection({ percentage }) {
+function PercentageSection() {
+    const { percentage } = useContext(MoneyWheelContext)
 
     const initPercentage = useCallback((num) => {
         const percentageData = percentage.find((p, index) => p?.resultName == num)

@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback, useContext, useEffect } from 'react'
 import { motion } from "motion/react"
 
 import red from "../assets/pictures/red-icon.png"
@@ -8,15 +8,18 @@ import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
 import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
 import casinoPlusBlack from "../assets/pictures/casino-logo.png"
+import { MoneyWheelContext } from '../App'
 
 
-function SideSection({
-    resultPulse,
-    setResultsPulse,
-    results,
-    isResultsHide,
-    setIsResultsHide
-}) {
+function SideSection() {
+    
+    const {
+        resultPulse,
+        setResultsPulse,
+        results,
+        isResultsHide,
+        setIsResultsHide
+    } = useContext(MoneyWheelContext);
 
     const customizeColorBasedOnNum = useCallback((num) => {
         if (num == 52) return "bg-black border-6 border-black ring-2 ring-white text-shadow-side-section "

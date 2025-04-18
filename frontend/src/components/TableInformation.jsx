@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useMemo, useState } from 'react'
+import React, { memo, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 
 import red from "../assets/pictures/red-icon.png"
 import blue from "../assets/pictures/blueIcon.png"
@@ -7,8 +7,14 @@ import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
 import casinoPlusBlack from "../assets/pictures/casino-logo.png"
 import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
+import { MoneyWheelContext } from '../App'
 
-function TableInformation({ fastNumInterval, count, setCount }) {
+function TableInformation() {
+    const {
+        fastNumInterval,
+        count,
+        setCount
+    } = useContext(MoneyWheelContext)
 
     const num = useMemo(() => [
         {
@@ -205,15 +211,15 @@ function TableInformation({ fastNumInterval, count, setCount }) {
         <div className='text-[45px] font-bold'>
             <div className='bg-pink-500 shadow-md shadow-black w-[80px] h-[80px] z-30 absolute left-[450px] wheel-pointer'>
             </div>
-            
+
             {/*  */}
             <div
-                className={` transition-all h-[920px] w-[920px] overflow-hidden shadow-2xl shadow-pink-500 rounded-full bg-black border-10 border-pink-500 relative`}
+                className={` transition-all h-[920px] w-[920px] overflow-hidden shadow-sm shadow-pink-500 rounded-full bg-black border-10 border-pink-500 relative`}
                 style={{
                     transform: `rotate(${count}deg)`
                 }}
             >
-                <div className='bg-white w-[150px] h-[150px]  -rotate-27 p-4 border-6 border-pink-500 ring-4 ring-pink-700 rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
+                <div className='bg-white w-[150px] h-[150px] shadow-lg shadow-black  -rotate-27 p-4 border-6 border-pink-500 ring-4 ring-pink-700 rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
                     <img src={casinoPlusBlack} alt="casinoPlusBlack" />
                 </div>
                 {num.map((n, index) => {
@@ -245,7 +251,7 @@ function TableInformation({ fastNumInterval, count, setCount }) {
                                     </div>
                                     : null}
                                 {n.inputNum == 52 ?
-                                    <div className='relative -rotate-10 left-4 top-5'>
+                                    <div className='relative -rotate-10 left-4 top-5 '>
                                         <img
                                             className='h-[25px]'
                                             src={casinoPlusBlack}

@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { motion } from 'motion/react'
+import { MoneyWheelContext } from '../App'
 
-function ModalResults({ children, isModalOpen }) {
+function ModalResults({ children }) {
+    const { isModalOpen } = useContext(MoneyWheelContext)
 
     if (!isModalOpen) {
         return false

@@ -1,34 +1,40 @@
-import React, { useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SideSection from './components/SideSection'
-import TitleSection from './components/TitleSection'
 import PercentageSection from './components/PercentageSection'
 import AdvertisementSection from './components/AdvertisementSection'
 import TableInformation from './components/TableInformation'
-import { fetchDeleteResults, fetchGetResults, fetchInsertResults } from './services/gameModifedApi'
 import ModalResults from './modal/ModalResults'
 import ResultsWinningSection from './components/ResultsWinningSection'
-import { Route, Routes, useLocation } from 'react-router-dom'
 import moneyWheelLogo from "./assets/pictures/money_wheel_logo.png"
 
+import { fetchDeleteResults, fetchGetResults, fetchInsertResults } from './services/gameModifedApi'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 
-
+export const MoneyWheelContext = createContext()
 function App() {
   const location = useLocation()
-  const locationTableName = location.pathname
-  const tableName = String(locationTableName).split("=").at(1)
+  const locationTableName = location.pathname;
+  const tableName = String(locationTableName).split("=").at(1);
+
   let keySequence = ''
+  const numInput = ["1", "2", "3", "4", "5", "6", "7", "00"]
+
+
   const [results, setResults] = useState([]);
   const [percentage, setPercentage] = useState([]);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [resultPulse, setResultsPulse] = useState(false)
-  const [resultNum, setResultNum] = useState(null);
+  const [tableInfo, setTableInfo] = useState([]);
+
   const [fastNumInterval, setFastNumInterval] = useState(2)
   const [count, setCount] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [resultPulse, setResultsPulse] = useState(false)
   const [isResultsHide, setIsResultsHide] = useState(false);
-  const [tableInfo, setTableInfo] = useState([])
+
+  const [resultNum, setResultNum] = useState(null);
+
 
   const handleEnterKeyCode = async (e) => {
     let keyPress = e.key
@@ -132,18 +138,11 @@ function App() {
         keySequence = ''
       }
 
-      if (
-        e.key === "1" ||
-        e.key === "2" ||
-        e.key === "3" ||
-        e.key === "4" ||
-        e.key === "5" ||
-        e.key === "6" ||
-        e.key === "7" ||
-        e.key === "00"
-      ) {
-        keySequence += keyPress
-      }
+      numInput.map(num => {
+        if (e.key === num) {
+          keySequence += keyPress
+        }
+      })
     } catch (error) {
       console.log(error)
     }
@@ -197,56 +196,60 @@ function App() {
           <p className='text-[72px] font-bold text-white text-shadow'>NO TABLE FOUND</p>
         </div>
         :
-        <div className="h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
-          <div className="h-full p-4">
-            <div className=" h-[5%]">
-              <Header tableInfo={tableInfo} />
-            </div>
-            <div className='h-[93%]'>
-              <div className='h-full flex w-full'>
-                <div className='text-center overflow-hidden w-[30%]'>
-                  <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
-                    <SideSection
-                      setIsResultsHide={setIsResultsHide}
-                      isResultsHide={isResultsHide}
-                      setResultsPulse={setResultsPulse}
-                      resultPulse={resultPulse}
-                      results={results} />
+        <MoneyWheelContext.Provider value={{
+          isModalOpen,
+          resultNum,
+          tableInfo,
+          fastNumInterval,
+          count,
+          resultPulse,
+          results,
+          isResultsHide,
+          percentage,
+          setResultsPulse,
+          setIsResultsHide,
+          setCount
+        }}>
+          <div className="h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
+            <div className="h-full p-4">
+              <div className=" h-[5%]">
+                <Header />
+              </div>
+              <div className='h-[93%]'>
+                <div className='h-full flex w-full'>
+                  <div className='text-center overflow-hidden w-[30%]'>
+                    <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
+                      <SideSection />
+                    </div>
                   </div>
-                </div>
-                <div className='w-[70%] '>
-                  <div className='h-full'>
-                    <div className="h-[31%]  overflow-hidden flex justify-center relative">
-                      <TableInformation
-                        count={count}
-                        setCount={setCount}
-                        fastNumInterval={fastNumInterval}
-                      />
-                    </div>
-                    <div className="h-[30%] overflow-hidden ">
-                      <div className='bg-white/30 rounded-3xl m-4 mx-6'>
-                        <PercentageSection percentage={percentage} />
+                  <div className='w-[70%] '>
+                    <div className='h-full'>
+                      <div className="h-[31%]  overflow-hidden flex justify-center relative">
+                        <TableInformation />
                       </div>
-                    </div>
-                    <div className="h-[39%] flex justify-center items-center ">
-                      <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl mx-6 h-[97%] w-full flex justify-center items-center overflow-hidden'>
-                        <AdvertisementSection />
+                      <div className="h-[30%] overflow-hidden ">
+                        <div className='bg-white/30 rounded-3xl m-4 mx-6'>
+                          <PercentageSection />
+                        </div>
+                      </div>
+                      <div className="h-[39%] flex justify-center items-center ">
+                        <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl mx-6 h-[97%] w-full flex justify-center items-center overflow-hidden'>
+                          <AdvertisementSection />
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="h-[2%] w-full relative">
+                <Footer />
+              </div>
             </div>
-            <div className="h-[2%] w-full relative">
-              <Footer />
-            </div>
+            <ModalResults >
+              <ResultsWinningSection />
+            </ModalResults>
           </div>
-          <ModalResults isModalOpen={isModalOpen}>
-            <ResultsWinningSection
-              resultNumber={resultNum}
-            />
-          </ModalResults>
-        </div>
+        </MoneyWheelContext.Provider>
       } />
     </Routes>
 
