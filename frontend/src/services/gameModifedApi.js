@@ -8,9 +8,13 @@ const deleteTableResults = import.meta.env.VITE_DELETE_TABLE_RESULT;
 
 const fetchGetResults = async (table_name) => {
   try {
+    // console.log(`${localHost}/${api}/${getTableInfo}?tableName=${table_name}`);
     const response = await axios.post(
       `${localHost}/${api}/${getTableInfo}?tableName=${table_name}`
     );
+
+    console.log(response);
+
     return response.data;
   } catch (error) {
     throw error;

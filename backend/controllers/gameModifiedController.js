@@ -17,7 +17,7 @@ exports.getTableInfo = async (req, res) => {
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   const {
     query: { tableName },
@@ -56,7 +56,7 @@ exports.getTableInfo = async (req, res) => {
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
+          calc: c.count,
         })
       );
       return newArr;
@@ -71,6 +71,7 @@ exports.getTableInfo = async (req, res) => {
   } catch (error) {
     return res.status(InternalServer).send({
       message: "Internal server error.",
+      error: error,
     });
   }
 };
@@ -90,7 +91,7 @@ exports.postResults = async (req, res) => {
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   const {
     body: { table_name, results_num },
@@ -164,7 +165,7 @@ exports.deleteResults = async (req, res) => {
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   try {
     const tableResultsMin = 20;

@@ -19,6 +19,10 @@ connection.getConnection((err, data) => {
     console.log("Can't connect to the database.");
   }
 
+  connection.query("SELECT * FROM tb_table", (err, data) => {
+    console.log(data);
+  });
+
   return console.log("connected to the database.");
 });
 

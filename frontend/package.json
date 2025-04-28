@@ -4,10 +4,14 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "vite --host",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
+  },
+  "config": {
+    "port": 3003,
+    "host": "app.casinoplus.org"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.1",
@@ -16,6 +20,7 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-fast-marquee": "^1.6.5",
+    "react-hook-form": "^7.55.0",
     "react-router-dom": "^7.5.0",
     "swiper": "^11.2.6",
     "tailwindcss": "^4.1.1"
