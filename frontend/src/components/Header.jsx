@@ -4,6 +4,7 @@ import { MoneyWheelContext } from "../App";
 
 function Header() {
   const { tableInfo } = useContext(MoneyWheelContext);
+  console.log("Hello");
 
   return (
     <div className="flex items-center justify-evenly h-full text-[32px] text-white poppins-bold w-full px-4 ">
