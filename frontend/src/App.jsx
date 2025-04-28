@@ -11,6 +11,7 @@ import moneyWheelLogo from "./assets/pictures/money_wheel_logo.png"
 
 import { fetchDeleteResults, fetchGetResults, fetchInsertResults } from './services/gameModifedApi'
 import { Route, Routes, useLocation } from 'react-router-dom'
+import HeaderSection from './components/HeaderSection'
 
 
 export const MoneyWheelContext = createContext()
@@ -210,29 +211,32 @@ function App() {
           setIsResultsHide,
           setCount
         }}>
-          <div className="h-screen transition-colors bg-cover bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
+          <div className="h-screen transition-colors bg-cover lilita-one-regular bg-[url(assets/pictures/bgPortraitEdit.PNG)]">
             <div className="h-full p-4">
-              <div className=" h-[5%]">
+              {/* <div className=" h-[5%]">
                 <Header />
-              </div>
-              <div className='h-[93%]'>
+              </div> */}
+              <div className='h-[98%]'>
                 <div className='h-full flex w-full'>
                   <div className='text-center overflow-hidden w-[30%]'>
                     <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
                       <SideSection />
                     </div>
                   </div>
-                  <div className='w-[70%] '>
+                  <div className='w-[70%]'>
                     <div className='h-full'>
-                      <div className="h-[31%]  overflow-hidden flex justify-center relative">
+                      <div className='h-[3.5%] flex justify-center items-center bg-white/30 rounded-3xl m-4 overflow-hidden'>
+                        <HeaderSection />
+                      </div>
+                      <div className="h-[30%] overflow-hidden flex justify-center relative">
                         <TableInformation />
                       </div>
-                      <div className="h-[30%] overflow-hidden ">
+                      <div className="h-[33%] overflow-hidden ">
                         <div className='bg-white/30 rounded-3xl m-4 mx-6'>
                           <PercentageSection />
                         </div>
                       </div>
-                      <div className="h-[39%] flex justify-center items-center ">
+                      <div className="h-[32.5%] flex justify-center items-center ">
                         <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl mx-6 h-[97%] w-full flex justify-center items-center overflow-hidden'>
                           <AdvertisementSection />
                         </div>

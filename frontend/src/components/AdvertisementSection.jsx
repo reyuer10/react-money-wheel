@@ -22,7 +22,7 @@ const images = [
 
 const AdvertisementSection = () => {
     return (
-        <div className="max-w-[65rem] mx-auto text-center">
+        <div className="max-w-[57rem] text-center">
             <Swiper
                 modules={[Autoplay, EffectCoverflow]}
                 effect="coverflow"
@@ -37,7 +37,7 @@ const AdvertisementSection = () => {
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 0,
-                    depth: 100,
+                    depth: 120,
                     modifier: 2.5,
                     slideShadows: false,
                 }}

@@ -5,8 +5,8 @@ import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
 import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
-import casinoPlusBlack from "../assets/pictures/casino-logo.png"
-import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
+import casinoStotsenbergLogoBlack from "../assets/pictures/casinoLogoBlack.png"
+import casinoStotsenbergLogoWhite from "../assets/pictures/casinoLogoWhite.png"
 import { MoneyWheelContext } from '../App'
 
 function TableInformation() {
@@ -220,7 +220,7 @@ function TableInformation() {
                 }}
             >
                 <div className='bg-white w-[150px] h-[150px] shadow-lg shadow-black  -rotate-27 p-4 border-6 border-pink-500 ring-4 ring-pink-700 rounded-full z-30 absolute left-[42%] top-[42%] flex justify-center items-center'>
-                    <img src={casinoPlusBlack} alt="casinoPlusBlack" />
+                    <img src={casinoStotsenbergLogoBlack} alt="casinoStotsenbergLogoBlack" />
                 </div>
                 {num.map((n, index) => {
                     return (
@@ -245,7 +245,7 @@ function TableInformation() {
                                     <div className='relative -rotate-10 left-6 top-5'>
                                         <img
                                             className='h-[25px]'
-                                            src={casinoPlusWhite}
+                                            src={casinoStotsenbergLogoWhite}
                                             alt="casinoPlusBg"
                                         />
                                     </div>
@@ -254,7 +254,7 @@ function TableInformation() {
                                     <div className='relative -rotate-10 left-4 top-5 '>
                                         <img
                                             className='h-[25px]'
-                                            src={casinoPlusBlack}
+                                            src={casinoStotsenbergLogoBlack}
                                             alt="casinoPlusBg"
                                         />
                                     </div>

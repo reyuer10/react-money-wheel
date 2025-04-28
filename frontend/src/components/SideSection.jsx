@@ -12,7 +12,7 @@ import { MoneyWheelContext } from '../App'
 
 
 function SideSection() {
-    
+
     const {
         resultPulse,
         setResultsPulse,
@@ -108,6 +108,7 @@ function SideSection() {
                                     ${r.results_num == 51 && "text-white p-6 text-[100px] bg-black rounded-full"}
                                     ${r.results_num == 52 && "text-black p-6 text-[100px] bg-white rounded-full"}
                                        ${r.results_num == 52 || r.results_num == 51 ? "" : "left-20 -top-1"}
+                                       ${r.results_num == 25 && "text-[95px]"}
                                     z-20 relative -top-1 
                                      `}>
                                     <p >{customizeFormatResultNumber(r.results_num)}</p>
