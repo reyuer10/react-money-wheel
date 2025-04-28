@@ -56,7 +56,7 @@ exports.getTableInfo = async (req, res) => {
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
+          calc: c.count,
         })
       );
       return newArr;
@@ -127,7 +127,7 @@ exports.postResults = async (req, res) => {
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
+          calc: c.count,
         })
       );
       return newArr;

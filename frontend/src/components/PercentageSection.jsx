@@ -13,7 +13,7 @@ function PercentageSection() {
 
     const initPercentage = useCallback((num) => {
         const percentageData = percentage.find((p, index) => p?.resultName == num)
-        return percentageData ? percentageData?.calc : '0%'
+        return percentageData ? percentageData?.calc : '0'
     }, [percentage])
 
     function customizeRemovePercentage(func) {
