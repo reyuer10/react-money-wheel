@@ -19,7 +19,6 @@ function App() {
   const location = useLocation()
   const locationTableName = location.pathname;
   const tableName = String(locationTableName).split("=").at(1);
-  const [secondCount, setSecondCount] = useState(0)
 
   let keySequence = ''
   const numInput = ["1", "2", "3", "4", "5", "6", "7", "0"]

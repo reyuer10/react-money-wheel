@@ -17,7 +17,7 @@ exports.getTableInfo = async (req, res) => {
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   const {
     query: { tableName },
@@ -90,7 +90,7 @@ exports.postResults = async (req, res) => {
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   const {
     body: { table_name, results_num },
@@ -164,7 +164,7 @@ exports.deleteResults = async (req, res) => {
     "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM moneywheel_db.tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
 
   try {
     const tableResultsMin = 20;
