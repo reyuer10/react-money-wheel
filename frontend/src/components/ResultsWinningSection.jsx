@@ -56,14 +56,14 @@ function ResultsWinningSection() {
         {
             numberId: 5,
             number: 51,
-            numCustomizeBackgroundColor: "text-shadow-side-section bg-white border-8 border-black ring-2 ring-white text-shadow-side-section",
+            numCustomizeBackgroundColor: " bg-white border-8 border-black ring-2 ring-white drop-shadow-2xl drop-shadow-black",
             numImage: null,
             numFormat: 50,
         },
         {
             numberId: 6,
             number: 52,
-            numCustomizeBackgroundColor: "text-shadow-side-section bg-black border-8 border-black ring-2 ring-white text-shadow-side-section",
+            numCustomizeBackgroundColor: " bg-black border-8 border-black ring-2 ring-white drop-shadow-2xl drop-shadow-black",
             numImage: null,
             numFormat: 50,
         },
@@ -90,7 +90,7 @@ function ResultsWinningSection() {
 
 
     return (
-        <div className='text-center '>
+        <div className='text-center lilita-one-regular'>
             <motion.div
                 transition={{
                     delay: 4,
@@ -102,7 +102,7 @@ function ResultsWinningSection() {
                     scale: 0.2,
                 }}
                 className={`${customizeColorBasedOnNum(resultNum)}
-                 rounded-3xl flex justify-evenly items-center text-white text-[300px] poppins-black text-shadow h-[500px] w-[800px] overflow-hidden
+                 rounded-3xl flex  justify-evenly items-center text-white text-[300px] text-shadow h-[500px] w-[800px] overflow-hidden
                  `}>
                 {resultNum == 51 || resultNum == 52 ? null : <>
                     <img
@@ -113,8 +113,8 @@ function ResultsWinningSection() {
                 </>}
 
                 <p className={`
-                    ${resultNum == 51 && "bg-black rounded-full"}
-                    ${resultNum == 52 && "text-black bg-white rounded-full"}
+                    ${resultNum == 51 && "bg-black rounded-full px-12"}
+                    ${resultNum == 52 && "text-black bg-white rounded-full px-12"}
                     z-20 px-6`}>
                     {customizeFormatBasedOnNum(resultNum)}
                 </p>

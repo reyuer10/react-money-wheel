@@ -42,11 +42,11 @@ function PercentageSection() {
                         </span>
                     </div>
                     <div className='w-[50%] flex items-center text-black'>
-                        <div className='w-full flex flex-col justify-evenly items-center'>
-                            <span>MIN:</span>
+                        <div className='w-full flex flex-col justify-evenly items-center '>
+                            <span className='border-b-2'>MIN:</span>
                             <span>MAX:</span>
                         </div>
-                        <div className='w-full text-[36px] flex flex-col text-left'>
+                        <div className='w-full text-[36px] flex flex-col text-left pr-8'>
                             <span>₱ {Number(tableInfo[0]?.fiftywhite_min).toLocaleString()}</span>
                             <span>₱ {Number(tableInfo[0]?.fiftywhite_max).toLocaleString()}</span>
                         </div>
@@ -72,7 +72,7 @@ function PercentageSection() {
                     </div>
                     <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
                         <div className='w-full flex flex-col justify-evenly items-center'>
-                            <span>MIN:</span>
+                            <span className='border-b-2 text-white'>MIN:</span>
                             <span>MAX:</span>
                         </div>
                         <div className='w-full text-[36px]  flex flex-col text-left'>
@@ -124,7 +124,7 @@ function PercentageSection() {
                     </div>
                     <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
                         <div className='w-full flex flex-col justify-evenly items-center'>
-                            <span>MIN:</span>
+                            <span className='border-b-2'>MIN:</span>
                             <span>MAX:</span>
                         </div>
                         <div className='w-full text-[36px] flex flex-col text-left'>
@@ -175,7 +175,7 @@ function PercentageSection() {
                     </div>
                     <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
                         <div className='w-full flex flex-col justify-evenly items-center'>
-                            <span>MIN:</span>
+                            <span className='border-b-2'>MIN:</span>
                             <span>MAX:</span>
                         </div>
                         <div className='w-full text-[36px] flex flex-col text-left'>
@@ -226,7 +226,7 @@ function PercentageSection() {
                     </div>
                     <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
                         <div className='w-full flex flex-col justify-evenly items-center'>
-                            <span>MIN:</span>
+                            <span className='border-b-2'>MIN:</span>
                             <span>MAX:</span>
                         </div>
                         <div className='w-full text-[36px] flex flex-col text-left'>
@@ -277,7 +277,7 @@ function PercentageSection() {
                     </div>
                     <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
                         <div className='w-full flex flex-col justify-evenly items-center'>
-                            <span>MIN:</span>
+                            <span className='border-b-2'>MIN:</span>
                             <span>MAX:</span>
                         </div>
                         <div className='w-full text-[36px] flex flex-col text-left'>
@@ -329,7 +329,7 @@ function PercentageSection() {
                         </div>
                         <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
                             <div className='w-full flex flex-col justify-evenly items-center'>
-                                <span>MIN:</span>
+                                <span className='border-b-2'>MIN:</span>
                                 <span>MAX:</span>
                             </div>
                             <div className='w-full text-[36px] flex flex-col text-left'>

@@ -6,8 +6,8 @@ import blue from "../assets/pictures/blueIcon.png"
 import yellow from "../assets/pictures/yellowIcon.png"
 import pink from "../assets/pictures/pinkicon.png"
 import white from "../assets/pictures/orangeIcon.png"
-import casinoPlusWhite from "../assets/pictures/casinoPlusWhite.png"
-import casinoPlusBlack from "../assets/pictures/casino-logo.png"
+import casinoLogoWhite from "../assets/pictures/casinoLogoWhite.png"
+import casinoLogoBlack from "../assets/pictures/casinoLogoBlack.png"
 import { MoneyWheelContext } from '../App'
 
 
@@ -20,9 +20,9 @@ function SideSection() {
         isResultsHide,
         setIsResultsHide
     } = useContext(MoneyWheelContext);
-
+    // drop-shadow-2xl drop-shadow-black
     const customizeColorBasedOnNum = useCallback((num) => {
-        if (num == 52) return "bg-black border-6 border-black ring-2 ring-white text-shadow-side-section "
+        if (num == 52) return "bg-black border-6 border-black ring-2 ring-white"
         if (num == 51) return "bg-white border-6 border-black ring-2 ring-white text-shadow-side-section"
         if (num == 25) return "bg-gradient-to-r from-red-500 via-red-700 to-red-900 text-white text-shadow-side-section border-4 border-red-200 shadow-xl shadow-red-700"
         if (num == 10) return "bg-gradient-to-r from-yellow-500 via-yellow-600 to-yellow-800 text-white text-shadow-side-section border-4 border-yellow-200 shadow-xl shadow-yellow-700"
@@ -32,8 +32,8 @@ function SideSection() {
     }, [])
 
     const customizeImageByNum = useCallback((num) => {
-        if (num == 52) return casinoPlusWhite
-        if (num == 51) return casinoPlusBlack
+        if (num == 52) return casinoLogoWhite
+        if (num == 51) return casinoLogoBlack
         if (num == 25) return red
         if (num == 10) return yellow
         if (num == 5) return blue

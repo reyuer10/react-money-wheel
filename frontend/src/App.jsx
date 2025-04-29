@@ -21,7 +21,7 @@ function App() {
   const tableName = String(locationTableName).split("=").at(1);
 
   let keySequence = ''
-  const numInput = ["1", "2", "3", "4", "5", "6", "7", "00"]
+  const numInput = ["1", "2", "3", "4", "5", "6", "7", "0"]
 
 
   const [results, setResults] = useState([]);
@@ -53,7 +53,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(1)
           setIsResultsHide(true)
-        } else if (keySequence == 2) {
+        } else if (keySequence == 3) {
           const response = await fetchInsertResults({
             table_name: tableName,
             results_num: 3
@@ -66,7 +66,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(3)
           setIsResultsHide(true)
-        } else if (keySequence == 3) {
+        } else if (keySequence == 5) {
           const response = await fetchInsertResults({
             table_name: tableName,
             results_num: 5
@@ -79,7 +79,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(5)
           setIsResultsHide(true)
-        } else if (keySequence == 4) {
+        } else if (keySequence == 10) {
           const response = await fetchInsertResults({
             table_name: tableName,
             results_num: 10
@@ -92,7 +92,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(10)
           setIsResultsHide(true)
-        } else if (keySequence == 5) {
+        } else if (keySequence == 25) {
           const response = await fetchInsertResults({
             table_name: tableName,
             results_num: 25
@@ -105,7 +105,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(25)
           setIsResultsHide(true)
-        } else if (keySequence == 6) {
+        } else if (keySequence === '00') {
           const response = await fetchDeleteResults()
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
