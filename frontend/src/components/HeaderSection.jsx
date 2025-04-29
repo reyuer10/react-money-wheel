@@ -14,13 +14,13 @@ function HeaderSection() {
             <div className=' flex items-center justify-evenly text-center'>
                 <span>
                     <img
-                        className=' max-w-[6vh] drop-shadow-md drop-shadow-black'
+                        className=' max-w-[9vh] drop-shadow-md drop-shadow-black'
                         src={casinoLogoWhite}
                         alt="casino_logo" />
                 </span>
                 <span className='flex flex-col items-center text-white leading-10'>
                     <p className='text-[20px] drop-shadow-md drop-shadow-black'>TABLE NAME:</p>
-                    <p className='text-[52px] drop-shadow-md drop-shadow-black'>
+                    <p className='text-[48px] drop-shadow-md drop-shadow-black'>
                         {tableInfo[0]?.table_name}
                     </p>
                 </span>

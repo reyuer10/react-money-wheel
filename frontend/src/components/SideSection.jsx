@@ -53,12 +53,23 @@ function SideSection() {
 
     const customizeImageSizeByNum = useCallback((num) => {
         if (num == 51) return "opacity-70 h-[50px] w-[150px]"
-        if (num == 25) return "opacity-70 h-[200px]"
-        if (num == 10) return "opacity-70 h-[200px]"
-        if (num == 5) return "opacity-70 h-[200px]"
-        if (num == 3) return "opacity-70 h-[200px]"
-        if (num == 1) return "opacity-70 h-[200px]"
+        if (num == 25) return "opacity-70 h-[130px]"
+        if (num == 10) return "opacity-70 h-[130px]"
+        if (num == 5) return "opacity-70 h-[130px]"
+        if (num == 3) return "opacity-70 h-[130px]"
+        if (num == 1) return "opacity-70 h-[130px]"
     }, [])
+
+    const customizeFontSizeByNum = useCallback((num) => {
+        if (num == 51) return "text-[142px]"
+        if (num == 25) return "text-[95px]"
+        if (num == 10) return "text-[95px]"
+        if (num == 5) return "text-[142px]"
+        if (num == 3) return "text-[142px]"
+        if (num == 1) return "text-[142px]"
+    }, [])
+
+
 
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -91,11 +102,12 @@ function SideSection() {
                                     ${isResultsHide ? "opacity-0" : "opacity-100"}
                                     ${resultPulse ? "neonText" : ""}
                                 ${customizeColorBasedOnNum(r.results_num)}
-                                 relative overflow-hidden text-[142px] text-black h-[240px] justify-center flex items-center m-6 rounded-2xl`}>
+                                ${customizeFontSizeByNum(r.results_num)}
+                                 relative overflow-hidden text-black h-[170px] justify-center flex items-center m-6 rounded-2xl`}>
                                 {r.results_num == 51 || r.results_num == 52 ? null : <>
-                                    <div className='absolute -top-[250px] -bottom-[40px]'>
+                                    <div className='absolute -top-[100px] -bottom-[40px]'>
                                         <img
-                                            className={`opacity-5 h-[500px]`}
+                                            className={`opacity-5 h-[300px]`}
                                             src={customizeImageByNum(r.results_num)} alt="character" />
                                     </div>
                                     <div className='absolute left-[10px]'>
@@ -105,13 +117,12 @@ function SideSection() {
                                     </div>
                                 </>}
                                 <div className={`
-                                    ${r.results_num == 51 && "text-white p-6 text-[100px] bg-black rounded-full"}
-                                    ${r.results_num == 52 && "text-black p-6 text-[100px] bg-white rounded-full"}
-                                       ${r.results_num == 52 || r.results_num == 51 ? "" : "left-20 -top-1"}
-                                       ${r.results_num == 25 && "text-[95px]"}
+                                    ${r.results_num == 51 && "text-white p-6 text-[80px] bg-black rounded-full"}
+                                    ${r.results_num == 52 && "text-black p-6 text-[80px] bg-white rounded-full"}
+                                       ${r.results_num == 52 || r.results_num == 51 ? "" : "left-14 -top-1"}
                                     z-20 relative -top-1 
                                      `}>
-                                    <p >{customizeFormatResultNumber(r.results_num)}</p>
+                                    <p>{customizeFormatResultNumber(r.results_num)}</p>
                                 </div>
                             </motion.div> :
                             <motion.div
@@ -126,27 +137,27 @@ function SideSection() {
                                     opacity: 1,
                                     x: 0
                                 }}
-                                className={`relative overflow-hidden text-[72px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[120px] flex justify-center items-center m-6 rounded-2xl`}>
+                                className={`relative overflow-hidden text-[68px] ${customizeColorBasedOnNum(r.results_num)} text-black h-[110px] flex justify-center items-center mx-6 my-4 rounded-2xl`}>
                                 {r.results_num == 51 || r.results_num == 52 ?
                                     <img
-                                        className=' h-[50px] w-[150px] relative right-5'
+                                        className=' h-[36px] w-[100px] relative right-3'
                                         src={customizeImageByNum(r.results_num)} alt="character" /> :
                                     <>
-                                        <div className='absolute -top-[250px] -bottom-[40px]'>
+                                        <div className='absolute -top-[150px] -bottom-[40px]'>
                                             <img
-                                                className=' opacity-5 h-[500px]'
+                                                className=' opacity-7 h-[300px]'
                                                 src={customizeImageByNum(r.results_num)} alt="character" />
                                         </div>
                                         <div className='absolute -left-[5px] -bottom-[40px]'>
                                             <img
-                                                className=' opacity-70 h-[200px]'
+                                                className=' opacity-70 h-[160px]'
                                                 src={customizeImageByNum(r.results_num)} alt="character" />
                                         </div>
                                     </>}
                                 <div className={`
-                                    ${r.results_num == 52 && " bg-white rounded-full p-3 text-[70px]  "}
-                                    ${r.results_num == 51 && "bg-black rounded-full p-3 text-[70px] text-white"} 
-                                     ${r.results_num == 52 || r.results_num == 51 ? "" : "left-20 -top-1"}
+                                    ${r.results_num == 52 && " bg-white rounded-full p-3 text-[40px] left-2  "}
+                                    ${r.results_num == 51 && "bg-black rounded-full p-3 text-[40px] left-2 text-white"} 
+                                     ${r.results_num == 52 || r.results_num == 51 ? "" : "left-15 -top-1"}
                                     z-20 relative`}>
                                     <p>{customizeFormatResultNumber(r.results_num)}</p>
                                 </div>

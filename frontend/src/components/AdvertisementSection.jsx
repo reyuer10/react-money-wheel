@@ -22,7 +22,7 @@ const images = [
 
 const AdvertisementSection = () => {
     return (
-        <div className="max-w-[57rem] text-center">
+        <div className="max-w-[450px] text-center">
             <Swiper
                 modules={[Autoplay, EffectCoverflow]}
                 effect="coverflow"
@@ -36,9 +36,9 @@ const AdvertisementSection = () => {
                 }}
                 coverflowEffect={{
                     rotate: 0,
-                    stretch: 0,
+                    stretch: 60,
                     depth: 120,
-                    modifier: 2.5,
+                    modifier: 1,
                     slideShadows: false,
                 }}
                 className="w-full"
@@ -48,11 +48,8 @@ const AdvertisementSection = () => {
                         <img
                             src={src}
                             alt={`Flower ${i}`}
-                            className={`rounded-xl h-full shadow-2xl shadow-white w-full object-cover`}
+                            className={`rounded-xl h-full shadow-md shadow-white w-full object-cover`}
                         />
-                        <br />
-                        <br />
-                        <br />
                     </SwiperSlide>
                 ))}
             </Swiper>

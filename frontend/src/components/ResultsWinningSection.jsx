@@ -97,9 +97,9 @@ function ResultsWinningSection() {
                     duration: 2,
                 }}
                 animate={{
-                    x: -700,
-                    y: -1900,
-                    scale: 0.2,
+                    x: -550,
+                    y: -1200,
+                    scale: 0,
                 }}
                 className={`${customizeColorBasedOnNum(resultNum)}
                  rounded-3xl flex  justify-evenly items-center text-white text-[300px] text-shadow h-[500px] w-[800px] overflow-hidden

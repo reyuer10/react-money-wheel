@@ -219,24 +219,24 @@ function App() {
               <div className='h-[98%]'>
                 <div className='h-full flex w-full'>
                   <div className='text-center overflow-hidden w-[30%]'>
-                    <div className='bg-white/30 rounded-3xl m-4 mx-6 py-1 h-[99%]'>
+                    <div className='bg-white/30 rounded-3xl m-4 mx-4 py-1 h-[99%] overflow-hidden'>
                       <SideSection />
                     </div>
                   </div>
                   <div className='w-[70%]'>
                     <div className='h-full'>
-                      <div className='h-[3.5%] flex justify-center items-center bg-white/30 rounded-3xl m-4 overflow-hidden'>
+                      <div className='h-[5%] flex justify-czrczrcenter items-center bg-white/30 rounded-3xl m-4 overflow-hidden'>
                         <HeaderSection />
                       </div>
-                      <div className="h-[30%] overflow-hidden flex justify-center relative">
+                      <div className="h-[30%] overflow-hidden flex justify-center relative mx-6">
                         <TableInformation />
                       </div>
-                      <div className="h-[33%] overflow-hidden ">
+                      <div className="h-[40%] overflow-hidden ">
                         <div className='bg-white/30 rounded-3xl m-4 mx-6'>
                           <PercentageSection />
                         </div>
                       </div>
-                      <div className="h-[32.5%] flex justify-center items-center ">
+                      <div className="h-[24%] flex justify-center items-center ">
                         <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl mx-6 h-[97%] w-full flex justify-center items-center overflow-hidden'>
                           <AdvertisementSection />
                         </div>
