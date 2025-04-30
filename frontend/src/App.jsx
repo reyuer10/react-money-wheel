@@ -231,12 +231,12 @@ function App() {
                       <div className="h-[30%] overflow-hidden flex justify-center relative mx-6">
                         <TableInformation />
                       </div>
-                      <div className="h-[40%] overflow-hidden ">
-                        <div className='bg-white/30 rounded-3xl m-4 mx-6'>
+                      <div className="h-[34%] overflow-hidden ">
+                        <div className='bg-white/30 rounded-3xl my-2 mx-6'>
                           <PercentageSection />
                         </div>
                       </div>
-                      <div className="h-[24%] flex justify-center items-center ">
+                      <div className="h-[30%] flex justify-center items-center ">
                         <div className=' bg-gradient-to-b from-white/30 via-white/20 to-white/10 rounded-3xl mx-6 h-[97%] w-full flex justify-center items-center overflow-hidden'>
                           <AdvertisementSection />
                         </div>

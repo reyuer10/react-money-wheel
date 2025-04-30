@@ -24,60 +24,62 @@ function PercentageSection() {
     return (
         <>
             <div className='text-4xl font-bold grid gap-3 p-4 lilita-one-regular'>
-                <div className='flex items-center text-center border-6 border-black w-full h-[85px]  m-auto bg-white  rounded-full'>
-                    <div className='flex items-center justify-evenly w-[50%]'>
-                        <span className=' h-[55px] w-[55px] bg-black text-white flex justify-center items-center rounded-full'>50</span>
-                        <span>
-                            <img
-                                className='h-[40px] drop-shadow-sm drop-shadow-gray-500'
-                                src={casinoStotsenbergLogoBlack}
-                                alt="casino-plus-white" />
-                        </span>
-                        <span className='text-[44px] text-black drop-shadow-sm drop-shadow-black z-30 flex items-center'>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                            {initResultCount(51)}
-                        </span>
-                    </div>
-                    <div className='w-[50%] flex items-center text-black'>
-                        <div className='w-full text-[24px] flex flex-col justify-evenly items-center '>
-                            <span className='border-b-2'>MIN:</span>
-                            <span>MAX:</span>
+                <div className='flex items-center'>
+                    <div className='relative flex items-center text-center border-6 border-black w-[50%] h-[85px] m-auto bg-white  rounded-full'>
+                        <div className='flex items-center justify-evenly w-full'>
+                            <span className=' h-[55px] w-[55px] bg-black text-white flex justify-center items-center rounded-full'>50</span>
+                            <span>
+                                <img
+                                    className='h-[40px] drop-shadow-sm drop-shadow-gray-500'
+                                    src={casinoStotsenbergLogoBlack}
+                                    alt="casino-plus-white" />
+                            </span>
+                            <span className='text-[44px] text-black drop-shadow-sm drop-shadow-black z-30 flex items-center'>
+                                {initResultCount(51)}
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
+                                    <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
                         </div>
-                        <div className='w-full text-[28px] flex flex-col text-left pr-8'>
-                            <span>₱ {Number(tableInfo[0]?.fiftywhite_min).toLocaleString()}</span>
-                            <span>₱ {Number(tableInfo[0]?.fiftywhite_max).toLocaleString()}</span>
+                        <div className='absolute w-full -top-9 flex items-center text-white'>
+                            <div className='w-[50%] text-[24px] flex flex-col text-center items-center'>
+                                <span className='relative top-1 text-[14px] w-[35px] text-white texts-shadow text-shadow-black rounded-tl-md rounded-tr-md'>MIN</span>
+                                <span className='w-[120px] bg-black/20 shadow shadow-gray-700 rounded-full text-shadow-md text-shadow-black'>₱ {Number(tableInfo[0]?.fiftywhite_min).toLocaleString()}</span>
+                            </div>
+                            <div className='w-[50%] text-[24px] flex flex-col text-center items-center'>
+                                <span className='relative top-1 text-[14px] w-[35px] text-white  texts-shadow text-shadow-black rounded-tl-md rounded-tr-md'>MAX</span>
+                                <span className='w-[120px] bg-black/20 shadow shadow-gray-700 rounded-full text-shadow-md text-shadow-black'>₱ {Number(tableInfo[0]?.fiftywhite_max).toLocaleString()}</span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className=' flex items-center text-center border-6 border-white w-full h-[85px]  m-auto bg-black text-white  rounded-full'>
-                    <div className='flex items-center justify-evenly w-[50%]'>
-                        <span className='h-[55px] w-[55px] bg-white text-black flex justify-center items-center rounded-full'>50</span>
-                        <span>
-                            <img
-                                className='h-[40px]'
-                                src={casinoStotsenbergLogoWhite}
-                                alt="casino-plus-white" />
-                        </span>
-                        <span className='text-[44px] text-shadow z-30 flex items-center'>
-                            <svg
-                                className='drop-shadow-md drop-shadow-gray-700'
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
-                            {initResultCount(52)}
-                        </span>
-                    </div>
-                    <div className='w-[50%] flex items-center drop-shadow-md drop-shadow-black text-white'>
-                        <div className='w-full text-[24px] flex flex-col justify-evenly items-center'>
-                            <span className='border-b-2 text-white'>MIN:</span>
-                            <span>MAX:</span>
+                    <div className='relative flex items-center text-center border-6 border-white w-[50%] h-[85px]  m-auto bg-black text-white  rounded-full'>
+                        <div className='flex items-center justify-evenly w-full'>
+                            <span className='h-[55px] w-[55px] bg-white text-black flex justify-center items-center rounded-full'>50</span>
+                            <span>
+                                <img
+                                    className='h-[40px]'
+                                    src={casinoStotsenbergLogoWhite}
+                                    alt="casino-plus-white" />
+                            </span>
+                            <span className='text-[44px] text-shadow z-30 flex items-center'>
+                                {initResultCount(52)}
+                                <svg
+                                    className='drop-shadow-md drop-shadow-gray-700'
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
+                                    <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+                            </span>
                         </div>
-                        <div className='w-full text-[28px]  flex flex-col text-left'>
-                            <span>₱ {Number(tableInfo[0]?.fiftyblack_min).toLocaleString()}</span>
-                            <span>₱ {Number(tableInfo[0]?.fiftyblack_max).toLocaleString()}</span>
+                        <div className='absolute text-white w-full -top-9 flex items-center'>
+                            <div className='w-[50%] text-[24px] flex flex-col text-center items-center'>
+                                <span className='relative top-1 text-[14px] w-[35px] text-white texts-shadow text-shadow-black'>MIN</span>
+                                <span className='w-[120px] bg-black/20 shadow shadow-gray-700 rounded-full text-shadow-md text-shadow-black'>₱ {Number(tableInfo[0]?.fiftywhite_min).toLocaleString()}</span>
+                            </div>
+                            <div className='w-[50%]  text-[24px] flex flex-col text-center items-center'>
+                                <span className='relative top-1 text-[14px] w-[35px] text-white texts-shadow text-shadow-black'>MAX</span>
+                                <span className='w-[120px] bg-black/20 shadow shadow-gray-700 rounded-full text-shadow-md text-shadow-black'>₱ {Number(tableInfo[0]?.fiftywhite_max).toLocaleString()}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -91,12 +93,12 @@ function PercentageSection() {
                                 alt="rednbata" />
                         </span>
                         <span className='text-[44px] text-shadow z-30 flex items-center'>
+                            {initResultCount(25)}
                             <svg
                                 className='drop-shadow-md drop-shadow-gray-700'
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
                                 <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
-                            {initResultCount(25)}
                         </span>
                         <span
                             className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-red-900 via-red-800 to-red-700  overflow-hidden`}
@@ -143,12 +145,12 @@ function PercentageSection() {
                                 alt="blue" />
                         </span>
                         <span className='text-[44px] text-shadow z-20 flex items-center'>
+                            {initResultCount(10)}
                             <svg
                                 className='drop-shadow-md drop-shadow-gray-700'
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
                                 <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
-                            {initResultCount(10)}
                         </span>
                         <span
                             className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-yellow-800 via-yellow-700 to-yellow-600  overflow-hidden`}
@@ -194,12 +196,12 @@ function PercentageSection() {
                                 alt="blue" />
                         </span>
                         <span className='text-[44px] text-shadow z-20 flex items-center'>
+                            {initResultCount(5)}
                             <svg
                                 className='drop-shadow-md drop-shadow-gray-700'
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
                                 <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
-                            {initResultCount(5)}
                         </span>
                         <span
                             className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700  overflow-hidden`}
@@ -245,12 +247,12 @@ function PercentageSection() {
                                 alt="pink" />
                         </span>
                         <span className='text-shadow z-20 text-[44px] flex items-center'>
+                            {initResultCount(3)}
                             <svg
                                 className='drop-shadow-md drop-shadow-gray-700'
                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
                                 <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
-                            {initResultCount(3)}
                         </span>
                         <span
                             className={` animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-pink-900 via-pink-800 to-pink-700 overflow-hidden`}
@@ -297,12 +299,12 @@ function PercentageSection() {
                                     alt="white" />
                             </span>
                             <span className='text-shadow z-20 flex items-center text-[44px]'>
+                                {initResultCount(1)}
                                 <svg
                                     className='drop-shadow-md drop-shadow-gray-700'
                                     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
                                     <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
                                 </svg>
-                                {initResultCount(1)}
                             </span>
                             <span
                                 className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-orange-900 via-orange-800 to-orange-700 overflow-hidden`}

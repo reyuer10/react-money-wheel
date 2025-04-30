@@ -211,8 +211,6 @@ function TableInformation() {
         <div className='text-[28px] font-bold'>
             <div className='bg-pink-500 shadow-md shadow-black w-[60px] h-[60px] z-30 absolute left-[310px] wheel-pointer'>
             </div>
-
-            {/*  */}
             <div
                 className={` transition-all h-[550px] w-[550px] overflow-hidden shadow-sm shadow-pink-500 rounded-full bg-black border-10 border-pink-500 relative`}
                 style={{

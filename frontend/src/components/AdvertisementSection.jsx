@@ -18,11 +18,19 @@ const images = [
     ads2,
     ads3,
     ads4,
+    ads1,
+    ads2,
+    ads3,
+    ads4,
+    ads1,
+    ads2,
+    ads3,
+    ads4,
 ];
 
 const AdvertisementSection = () => {
     return (
-        <div className="max-w-[450px] text-center">
+        <div className="max-w-[30vh] text-center">
             <Swiper
                 modules={[Autoplay, EffectCoverflow]}
                 effect="coverflow"
@@ -36,19 +44,18 @@ const AdvertisementSection = () => {
                 }}
                 coverflowEffect={{
                     rotate: 0,
-                    stretch: 60,
-                    depth: 120,
+                    stretch: 100,
+                    depth: 200,
                     modifier: 1,
                     slideShadows: false,
                 }}
-                className="w-full"
             >
                 {images.map((src, i) => (
                     <SwiperSlide key={i}>
                         <img
                             src={src}
                             alt={`Flower ${i}`}
-                            className={`rounded-xl h-full shadow-md shadow-white w-full object-cover`}
+                            className={`rounded-xl h-full shadow-xl shadow-black w-full object-cover`}
                         />
                     </SwiperSlide>
                 ))}
