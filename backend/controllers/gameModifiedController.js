@@ -6,18 +6,19 @@ const InternalServer = 500;
 exports.getTableInfo = async (req, res) => {
   const queryGetTableInfo = "SELECT * FROM tb_table WHERE table_name = ?";
   const queryGetTableResults =
-    "SELECT * FROM tb_results order by results_id desc";
+    "SELECT * FROM tb_results WHERE results_table = ? order by results_id desc";
 
-  const queryGetTableResultsAsc = "SELECT * FROM tb_results";
+  const queryGetTableResultsAsc =
+    "SELECT * FROM tb_results WHERE results_table = ?";
 
   const queryGetMinMaxTableResultCount =
-    "SELECT MAX(results_id) as maxResults_id FROM tb_results";
+    "SELECT MAX(results_id) as maxResults_id FROM tb_results WHERE results_table = ?";
 
   const queryGetCustomizeTableResults =
-    "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
+    "SELECT * FROM tb_results WHERE results_table = ? AND results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results WHERE results_table = ? GROUP BY results_num ORDER BY results_num DESC";
 
   const {
     query: { tableName },
@@ -25,14 +26,21 @@ exports.getTableInfo = async (req, res) => {
 
   try {
     const tableResultsMin = 20;
-    const getResultsCount = await databaseQuery(queryGetResultCount);
+    const getResultsCount = await databaseQuery(queryGetResultCount, [
+      tableName,
+    ]);
     const getLatestResultsId = await databaseQuery(
-      queryGetMinMaxTableResultCount
+      queryGetMinMaxTableResultCount,
+      [tableName]
     );
     const latestResultsId = getLatestResultsId[0]?.maxResults_id;
     const getTableInfo = await databaseQuery(queryGetTableInfo, [tableName]);
-    const getTableResults = await databaseQuery(queryGetTableResults);
-    const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc);
+    const getTableResults = await databaseQuery(queryGetTableResults, [
+      tableName,
+    ]);
+    const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc, [
+      tableName,
+    ]);
     const tableTotalLength = getTableResults.length;
 
     const newStartIndex =
@@ -48,7 +56,7 @@ exports.getTableInfo = async (req, res) => {
     const startIndex = initialStartIndex();
     const getCustomizeTableResults = await databaseQuery(
       queryGetCustomizeTableResults,
-      [startIndex, latestResultsId]
+      [tableName, startIndex, latestResultsId]
     );
 
     function calculatePercentageResults() {
@@ -79,18 +87,19 @@ exports.postResults = async (req, res) => {
   const queryInsertResults =
     "INSERT INTO tb_results(`results_table`, `results_num`, `results_created`) VALUE(?, ?, NOW())";
   const queryGetTableResults =
-    "SELECT * FROM tb_results order by results_id desc";
+    "SELECT * FROM tb_results WHERE results_table = ? order by results_id desc";
 
-  const queryGetTableResultsAsc = "SELECT * FROM tb_results";
+  const queryGetTableResultsAsc =
+    "SELECT * FROM tb_results WHERE results_table = ?";
 
   const queryGetMinMaxTableResultCount =
-    "SELECT MAX(results_id) as maxResults_id FROM tb_results";
+    "SELECT MAX(results_id) as maxResults_id FROM tb_results WHERE results_table = ?";
 
   const queryGetCustomizeTableResults =
-    "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
+    "SELECT * FROM tb_results WHERE results_table = ? AND results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results WHERE results_table = ? GROUP BY results_num ORDER BY results_num DESC";
 
   const {
     body: { table_name, results_num },
@@ -99,16 +108,21 @@ exports.postResults = async (req, res) => {
     const tableResultsMin = 20;
     await databaseQuery(queryInsertResults, [table_name, results_num]);
 
-    const getTableResults = await databaseQuery(queryGetTableResults);
+    const getTableResults = await databaseQuery(queryGetTableResults, [
+      table_name,
+    ]);
     const tableTotalLength = getTableResults.length;
     const getLatestResultsId = await databaseQuery(
-      queryGetMinMaxTableResultCount
+      queryGetMinMaxTableResultCount,
+      [table_name]
     );
     const latestResultsId = getLatestResultsId[0]?.maxResults_id;
     const calculateStartIndex = tableTotalLength - tableResultsMin;
     const newStartIndex = calculateStartIndex <= 0 ? 1 : calculateStartIndex;
 
-    const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc);
+    const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc, [
+      table_name,
+    ]);
 
     function initialStartIndex() {
       return getTableResultsAsc.find((t, index) => index == newStartIndex)
@@ -118,10 +132,12 @@ exports.postResults = async (req, res) => {
     const startIndex = initialStartIndex();
     const getCustomizeTableResults = await databaseQuery(
       queryGetCustomizeTableResults,
-      [startIndex, latestResultsId]
+      [table_name, startIndex, latestResultsId]
     );
 
-    const getResultsCount = await databaseQuery(queryGetResultCount);
+    const getResultsCount = await databaseQuery(queryGetResultCount, [
+      table_name,
+    ]);
     function calculatePercentageResults() {
       let newArr = [];
       getResultsCount.map((c) =>
@@ -147,37 +163,47 @@ exports.postResults = async (req, res) => {
 
 exports.deleteResults = async (req, res) => {
   const queryGetLatestResultsId =
-    "SELECT MAX(results_id) as results_id FROM tb_results LIMIT 1;";
+    "SELECT MAX(results_id) as results_id FROM tb_results WHERE results_table = ? LIMIT 1;";
 
   const queryDeleteLatestResults =
     "DELETE FROM tb_results WHERE results_id = ?";
 
   const queryGetTableResults =
-    "SELECT * FROM tb_results order by results_id desc";
+    "SELECT * FROM tb_results WHERE results_table = ? order by results_id desc";
 
-  const queryGetTableResultsAsc = "SELECT * FROM tb_results";
+  const queryGetTableResultsAsc =
+    "SELECT * FROM tb_results WHERE results_table = ?";
 
   const queryGetMinMaxTableResultCount =
-    "SELECT MAX(results_id) as maxResults_id FROM tb_results";
+    "SELECT MAX(results_id) as maxResults_id FROM tb_results WHERE results_table = ?";
 
   const queryGetCustomizeTableResults =
-    "SELECT * FROM tb_results WHERE results_id BETWEEN ? AND ? order by results_id desc";
+    "SELECT * FROM tb_results WHERE results_table = ? AND results_id BETWEEN ? AND ? order by results_id desc";
 
   const queryGetResultCount =
-    "SELECT results_num, COUNT(results_num) AS count FROM tb_results GROUP BY results_num ORDER BY results_num DESC";
+    "SELECT results_num, COUNT(results_num) AS count FROM tb_results WHERE results_table = ? GROUP BY results_num ORDER BY results_num DESC";
+
+  const {
+    query: { table_name },
+  } = req;
 
   try {
     const tableResultsMin = 20;
-    const getLatestResultsId = await databaseQuery(queryGetLatestResultsId);
+    const getLatestResultsId = await databaseQuery(queryGetLatestResultsId, [
+      table_name,
+    ]);
 
     const latestResultsId = getLatestResultsId[0]?.results_id;
     await databaseQuery(queryDeleteLatestResults, [latestResultsId]);
 
-    const getTableResults = await databaseQuery(queryGetTableResults);
+    const getTableResults = await databaseQuery(queryGetTableResults, [
+      table_name,
+    ]);
 
     const tableTotalLength = getTableResults.length;
     const getLatestMaxResultId = await databaseQuery(
-      queryGetMinMaxTableResultCount
+      queryGetMinMaxTableResultCount,
+      [table_name]
     );
     const maxResultsId = getLatestMaxResultId[0]?.maxResults_id;
 
@@ -186,7 +212,9 @@ exports.deleteResults = async (req, res) => {
         ? 1
         : tableTotalLength - tableResultsMin;
 
-    const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc);
+    const getTableResultsAsc = await databaseQuery(queryGetTableResultsAsc, [
+      table_name,
+    ]);
 
     function initialStartIndex() {
       return getTableResultsAsc.find((t, index) => index == newStartIndex)
@@ -196,18 +224,18 @@ exports.deleteResults = async (req, res) => {
     const startIndex = initialStartIndex();
     const getCustomizeTableResults = await databaseQuery(
       queryGetCustomizeTableResults,
-      [startIndex, maxResultsId]
+      [table_name, startIndex, maxResultsId]
     );
 
-    const getResultsCount = await databaseQuery(queryGetResultCount);
+    const getResultsCount = await databaseQuery(queryGetResultCount, [
+      table_name,
+    ]);
     function calculatePercentageResults() {
-      console.log(getResultsCount);
-      console.log("Total length: ", tableTotalLength);
       let newArr = [];
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
-          calc: Number((c.count / tableTotalLength) * 100).toFixed(2) + "%",
+          calc: c.count,
         })
       );
       return newArr;
@@ -221,6 +249,7 @@ exports.deleteResults = async (req, res) => {
   } catch (error) {
     return res.status(InternalServer).send({
       message: "Internal server error.",
+      error: error,
     });
   }
 };

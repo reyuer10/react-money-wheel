@@ -42,6 +42,8 @@ const AdvertisementSection = () => {
                     delay: 3000,
                     disableOnInteraction: false,
                 }}
+                // stretch: 100,
+                // depth: 200,
                 coverflowEffect={{
                     rotate: 0,
                     stretch: 100,

@@ -33,13 +33,14 @@ const fetchInsertResults = async ({ table_name, results_num }) => {
   }
 };
 
-const fetchDeleteResults = async () => {
+const fetchDeleteResults = async (table_name) => {
   try {
     const response = await axios.delete(
-      `${localHost}/${api}/${deleteTableResults}`
+      `${localHost}/${api}/${deleteTableResults}?table_name=${table_name}`
     );
     return response.data;
   } catch (error) {
+    console.log(error);
     throw error;
   }
 };

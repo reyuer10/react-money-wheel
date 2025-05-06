@@ -106,7 +106,7 @@ function App() {
           setResultNum(25)
           setIsResultsHide(true)
         } else if (keySequence === '00') {
-          const response = await fetchDeleteResults()
+          const response = await fetchDeleteResults(tableName)
           setResults(response.tableResults)
           setPercentage(response.tablePercentage)
         } else if (keySequence == 51) {
