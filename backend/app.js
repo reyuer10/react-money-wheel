@@ -21,11 +21,10 @@ app.use(express.json());
 // );
 
 // When using production:
-//     origin: ["http://app.casinoplus.org:5176"],
 
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
+    origin: ["http://app.casinoplus.org:5176"],
     methods: ["GET", "PUT", "POST", "DELETE"],
     credentials: true,
   })
@@ -34,9 +33,9 @@ app.use(
 app.use("/api/moneywheel", gameModifiedRoutes);
 
 // when using production on port:
-// const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3003;
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log("Server is running at port", PORT);

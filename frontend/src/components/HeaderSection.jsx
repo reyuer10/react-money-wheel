@@ -1,31 +1,33 @@
-import React, { memo, useContext, useEffect } from 'react'
-import { MoneyWheelContext } from '../App'
-import casinoLogoWhite from "../assets/pictures/casinoLogoWhite.png"
+import React, { memo, useContext, useEffect } from "react";
+import { MoneyWheelContext } from "../App";
+import casinoLogoWhite from "../assets/pictures/casinoLogoWhite.png";
 
 function HeaderSection() {
-    const { tableInfo } = useContext(MoneyWheelContext);
+  const { tableInfo } = useContext(MoneyWheelContext);
 
-
-    useEffect(() => {
-        console.log(tableInfo[0])
-    }, [])
-    return (
-        <div className='w-full'>
-            <div className=' flex items-center justify-evenly text-center'>
-                <span>
-                    <img
-                        className=' max-w-[9vh] drop-shadow-md drop-shadow-black'
-                        src={casinoLogoWhite}
-                        alt="casino_logo" />
-                </span>
-                <span className='flex flex-col items-center text-white leading-10'>
-                    <p className='text-[20px] drop-shadow-md drop-shadow-black'>TABLE NAME:</p>
-                    <p className='text-[48px] drop-shadow-md drop-shadow-black'>
-                        {tableInfo[0]?.table_name}
-                    </p>
-                </span>
-            </div>
-            {/* <table className='w-full '>
+  useEffect(() => {
+    console.log(tableInfo[0]);
+  }, []);
+  return (
+    <div className="w-full">
+      <div className=" flex items-center justify-evenly text-center">
+        <span>
+          <img
+            className=" max-w-[9vh] drop-shadow-md drop-shadow-black"
+            src={casinoLogoWhite}
+            alt="casino_logo"
+          />
+        </span>
+        <span className="flex flex-col items-center text-white leading-10">
+          <p className="text-[20px] drop-shadow-md drop-shadow-black">
+            TABLE NAME:
+          </p>
+          <p className="text-[48px] drop-shadow-md drop-shadow-black">
+            {tableInfo[0]?.table_name}
+          </p>
+        </span>
+      </div>
+      {/* <table className='w-full '>
                 <thead>
                     <tr className='text-white text-[42px] tracking-widest text-center drop-shadow-md drop-shadow-black'>
                         <th>BATA</th>
@@ -79,8 +81,8 @@ function HeaderSection() {
                     </tr>
                 </tbody>
             </table> */}
-        </div>
-    )
+    </div>
+  );
 }
 
-export default memo(HeaderSection)
+export default memo(HeaderSection);
