@@ -234,7 +234,7 @@ function TableInformation() {
                                 ${n.inputNum == 51 ? "right-1" : "right-8"}
                                 z-30 w-[13px]  list-none absolute top-25 h-[13px] bg-[#ffffff] shadow-2xl shadow-yellow-300 light-drop-shadow animate-pulse rounded-full`}></li>
                             <div className="relative top-30 left-4">
-                                <p className={`-rotate-10 text-shadow-md text-shadow-black
+                                <p className={`-rotate-10
                                     ${n.inputNum == 51 ? "relative left-4" : ""}
                                     ${CustomizeColorBorderBasedOnNum(n.inputNum)}`}>
                                     {n.num}

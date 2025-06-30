@@ -13,18 +13,22 @@ import {
   fetchDeleteResults,
   fetchGetResults,
   fetchInsertResults,
+  fetchUpdateNewShoeTable,
 } from "./services/gameModifedApi";
 import { Route, Routes, useLocation } from "react-router-dom";
 import HeaderSection from "./components/HeaderSection";
+import ModalShoeHistory from "./modal/ModalShoeHistory";
+import TableShoeHistory from "./components/TableShoeHistory";
 
 export const MoneyWheelContext = createContext();
 function App() {
   const location = useLocation();
   const locationTableName = location.pathname;
   const tableName = String(locationTableName).split("=").at(1);
+  const [isShoeHistoryModalOpen, setIsShoeHistoryModalOpen] = useState(false)
 
   let keySequence = "";
-  const numInput = ["1", "2", "3", "4", "5", "6", "7", "0"];
+  const numInput = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "*"];
 
   const [results, setResults] = useState([]);
   const [percentage, setPercentage] = useState([]);
@@ -136,6 +140,18 @@ function App() {
           setFastNumInterval(30);
           setResultNum(52);
           setIsResultsHide(true);
+        } else if (keySequence == "+++") {
+          const response = await fetchUpdateNewShoeTable({ table_name: tableName })
+          if (response) {
+            const responseGetResults = await fetchGetResults(tableName);
+            setResults(responseGetResults.tableResults);
+            setPercentage(responseGetResults.tablePercentage);
+            setTableInfo(responseGetResults.tableInfo);
+          }
+        } else if (keySequence == "**") {
+          setIsShoeHistoryModalOpen(true)
+        } else if (keySequence == 778899) {
+          setIsShoeHistoryModalOpen(false)
         }
         keySequence = "";
       }
@@ -146,7 +162,7 @@ function App() {
         }
       });
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
 
@@ -169,17 +185,20 @@ function App() {
     };
   }, [isModalOpen]);
 
+  const handleFetchGetTableInfo = async () => {
+    try {
+      const response = await fetchGetResults(tableName);
+      setResults(response.tableResults);
+      setPercentage(response.tablePercentage);
+      setTableInfo(response.tableInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+
   useEffect(() => {
-    const handleFetchGetTableInfo = async () => {
-      try {
-        const response = await fetchGetResults(tableName);
-        setResults(response.tableResults);
-        setPercentage(response.tablePercentage);
-        setTableInfo(response.tableInfo);
-      } catch (error) {
-        console.log(error);
-      }
-    };
 
     handleFetchGetTableInfo();
   }, []);
@@ -258,6 +277,13 @@ function App() {
                 <ModalResults>
                   <ResultsWinningSection />
                 </ModalResults>
+                <ModalShoeHistory isModalOpen={isShoeHistoryModalOpen}>
+                  <TableShoeHistory
+                    tableName={tableName}
+                    setIsShoeHistoryModalOpen={setIsShoeHistoryModalOpen}
+                    handleFetchGetTableInfo={handleFetchGetTableInfo}
+                  />
+                </ModalShoeHistory>
               </div>
             </MoneyWheelContext.Provider>
           )

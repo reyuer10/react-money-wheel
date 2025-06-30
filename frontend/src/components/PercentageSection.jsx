@@ -13,7 +13,7 @@ function PercentageSection() {
 
     const initResultCount = useCallback((num) => {
         const percentageData = percentage.find((p, index) => p?.resultName == num)
-        return percentageData ? percentageData?.calc : '0'
+        return percentageData ? percentageData?.calc : '0%'
     }, [percentage])
 
     function customizeRemovePercentage(func) {
@@ -36,10 +36,6 @@ function PercentageSection() {
                             </span>
                             <span className='text-[44px] text-black drop-shadow-sm drop-shadow-black z-30 flex items-center'>
                                 {initResultCount(51)}
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                    <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="black" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
                             </span>
                         </div>
                         <div className='absolute w-full -top-9 flex items-center text-white'>
@@ -64,11 +60,6 @@ function PercentageSection() {
                             </span>
                             <span className='text-[44px] text-shadow z-30 flex items-center'>
                                 {initResultCount(52)}
-                                <svg
-                                    className='drop-shadow-md drop-shadow-gray-700'
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                    <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
                             </span>
                         </div>
                         <div className='absolute text-white w-full -top-9 flex items-center'>
@@ -94,11 +85,7 @@ function PercentageSection() {
                         </span>
                         <span className='text-[44px] text-shadow z-30 flex items-center'>
                             {initResultCount(25)}
-                            <svg
-                                className='drop-shadow-md drop-shadow-gray-700'
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                
                         </span>
                         <span
                             className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-red-900 via-red-800 to-red-700  overflow-hidden`}
@@ -146,11 +133,7 @@ function PercentageSection() {
                         </span>
                         <span className='text-[44px] text-shadow z-20 flex items-center'>
                             {initResultCount(10)}
-                            <svg
-                                className='drop-shadow-md drop-shadow-gray-700'
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                
                         </span>
                         <span
                             className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-yellow-800 via-yellow-700 to-yellow-600  overflow-hidden`}
@@ -197,11 +180,7 @@ function PercentageSection() {
                         </span>
                         <span className='text-[44px] text-shadow z-20 flex items-center'>
                             {initResultCount(5)}
-                            <svg
-                                className='drop-shadow-md drop-shadow-gray-700'
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                
                         </span>
                         <span
                             className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-blue-900 via-blue-800 to-blue-700  overflow-hidden`}
@@ -248,11 +227,7 @@ function PercentageSection() {
                         </span>
                         <span className='text-shadow z-20 text-[44px] flex items-center'>
                             {initResultCount(3)}
-                            <svg
-                                className='drop-shadow-md drop-shadow-gray-700'
-                                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                            </svg>
+                
                         </span>
                         <span
                             className={` animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-pink-900 via-pink-800 to-pink-700 overflow-hidden`}
@@ -300,11 +275,6 @@ function PercentageSection() {
                             </span>
                             <span className='text-shadow z-20 flex items-center text-[44px]'>
                                 {initResultCount(1)}
-                                <svg
-                                    className='drop-shadow-md drop-shadow-gray-700'
-                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32" color="#000000" fill="none">
-                                    <path d="M18 6L12 12M12 12L6 18M12 12L18 18M12 12L6 6" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
-                                </svg>
                             </span>
                             <span
                                 className={`animate-pulse transition-all left-0 absolute z-10 h-[85px] bg-gradient-to-r from-orange-900 via-orange-800 to-orange-700 overflow-hidden`}

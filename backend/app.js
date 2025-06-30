@@ -21,6 +21,7 @@ app.use(express.json());
 // );
 
 // When using production:
+//
 
 app.use(
   cors({
@@ -33,9 +34,9 @@ app.use(
 app.use("/api/moneywheel", gameModifiedRoutes);
 
 // when using production on port:
-const PORT = process.env.PORT || 3003;
+// const PORT = process.env.PORT || 3003;
 
-// const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3003;
 
 app.listen(PORT, () => {
   console.log("Server is running at port", PORT);

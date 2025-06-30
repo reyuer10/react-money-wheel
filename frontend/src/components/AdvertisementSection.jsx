@@ -9,22 +9,26 @@ import noSmokingImg from "../assets/ads/nosmoke.png";
 // import ads4 from "../assets/pictures/ads_4.jpg";
 
 import one from "../assets/adver/1.jpg";
-import two from "../assets/adver/dailytreats.jpg";
+// import two from "../assets/adver/dailytreats.jpg";
 import three from "../assets/adver/3.jpg";
-import four from "../assets/adver/4.jpg";
-import six from "../assets/adver/slotmaster.jpg";
+// import four from "../assets/adver/4.jpg";
+// import six from "../assets/adver/slotmaster.jpg";
 import seven from "../assets/adver/7.jpg";
-import eight from "../assets/adver/kioskbaccarat.jpg";
-import nine from "../assets/adver/summerfiesta.jpg";
+// import eight from "../assets/adver/kioskbaccarat.jpg";
+// import nine from "../assets/adver/summerfiesta.jpg";
+
+import session_template from "../assets/ads/july/session_template.png"
+import swerte_daily_treats from "../assets/ads/july/swerte_daily_treats.png"
+import swerte_flip_rewards from "../assets/ads/july/swerte_flip_rewards.png"
+import race2win from "../assets/ads/july/race2win.jpg"
+import swerte_bongga_jackpot from "../assets/ads/july/swerte_bongga_jackpot.png"
 
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-import { useLocation } from "react-router-dom";
 
-const images = [one, two, three, four, six, seven, eight, nine];
+const images = [session_template, swerte_daily_treats, swerte_flip_rewards, race2win, swerte_bongga_jackpot, one, three, seven];
 
 const AdvertisementSection = () => {
-  const location = useLocation();
   return (
     <div className="max-w-[30vh] text-center">
       <Swiper
@@ -32,7 +36,7 @@ const AdvertisementSection = () => {
         effect="coverflow"
         grabCursor={true}
         centeredSlides={true}
-        slidesPerView={2}
+        slidesPerView={1.9}
         loop={true}
         autoplay={{
           delay: 3000,
