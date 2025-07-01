@@ -331,6 +331,20 @@ exports.newShoeTable = async (req, res) => {
     console.log("currShoeTable: ", currShoeTable);
     console.log("latestCurrentShoe: ", latestCurrentShoe);
 
+    console.log(incrementCurrentShoe);
+
+    // else if (latestCurrentShoe == null) {
+    //   await databaseQuery(queryReportAddlogs, [
+    //     `New shoe detected on table ${table_name}`,
+    //     currShoeTable,
+    //     incrementCurrentShoe,
+    //   ]);
+
+    //   await databaseQuery(queryNewShoeTable, [
+    //     incrementCurrentShoe,
+    //     table_name,
+    //   ]);
+    // }
     if (currShoeTable == null) {
       await databaseQuery(queryReportAddlogs, [
         `New shoe detected on table ${table_name}`,
@@ -338,8 +352,7 @@ exports.newShoeTable = async (req, res) => {
         1,
       ]);
       await databaseQuery(queryNewShoeTable, [1, table_name]);
-    }
-    if (currShoeTable < latestCurrentShoe) {
+    } else if (currShoeTable < latestCurrentShoe) {
       await databaseQuery(queryReportAddlogs, [
         `New shoe detected on table ${table_name}`,
         currShoeTable,
