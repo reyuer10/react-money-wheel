@@ -9,7 +9,7 @@ import casinoStotsenbergLogoBlack from "../assets/pictures/casinoLogoBlack.png";
 import { MoneyWheelContext } from "../App";
 
 function PercentageSection() {
-  const { percentage, tableInfo } = useContext(MoneyWheelContext);
+  const { percentage, tableInfo, latestResult } = useContext(MoneyWheelContext);
 
   const initResultCount = useCallback(
     (num) => {
@@ -107,11 +107,10 @@ function PercentageSection() {
             </span>
             <span className="z-30">
               <img
-                className={`h-[65px] ${
-                  customizeRemovePercentage(initResultCount(25)) >= 50
-                    ? "animate-bounce"
-                    : null
-                }`}
+                className={`h-[65px] ${latestResult == 25
+                  ? "animate-bounce"
+                  : null
+                  }`}
                 src={red}
                 alt="rednbata"
               />
@@ -172,11 +171,10 @@ function PercentageSection() {
             </span>
             <span className="z-20">
               <img
-                className={`h-[65px] ${
-                  customizeRemovePercentage(initResultCount(10)) >= 50
-                    ? "animate-bounce"
-                    : null
-                }`}
+                className={`h-[65px] ${latestResult == 10
+                  ? "animate-bounce"
+                  : null
+                  }`}
                 src={yellow}
                 alt="blue"
               />
@@ -233,11 +231,10 @@ function PercentageSection() {
             </span>
             <span className="z-20">
               <img
-                className={`h-[65px] ${
-                  customizeRemovePercentage(initResultCount(5)) >= 50
-                    ? "animate-bounce"
-                    : null
-                }`}
+                className={`h-[65px] ${latestResult == 5
+                  ? "animate-bounce"
+                  : null
+                  }`}
                 src={blue}
                 alt="blue"
               />
@@ -294,11 +291,10 @@ function PercentageSection() {
             </span>
             <span className="z-20">
               <img
-                className={`h-[65px] ${
-                  customizeRemovePercentage(initResultCount(3)) >= 50
-                    ? "animate-bounce"
-                    : null
-                }`}
+                className={`h-[65px] ${latestResult == 3
+                  ? "animate-bounce"
+                  : null
+                  }`}
                 src={pink}
                 alt="pink"
               />
@@ -356,11 +352,10 @@ function PercentageSection() {
               </span>
               <span className="z-20">
                 <img
-                  className={`h-[65px] ${
-                    customizeRemovePercentage(initResultCount(1)) >= 50
-                      ? "animate-bounce"
-                      : null
-                  }`}
+                  className={`h-[65px] ${latestResult == 1
+                    ? "animate-bounce"
+                    : null
+                    }`}
                   src={white}
                   alt="white"
                 />

@@ -39,6 +39,7 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [resultPulse, setResultsPulse] = useState(false);
   const [isResultsHide, setIsResultsHide] = useState(false);
+  const [latestResult, setLatestResult] = useState(null)
 
   const [resultNum, setResultNum] = useState(null);
 
@@ -51,6 +52,8 @@ function App() {
             table_name: tableName,
             results_num: 1,
           });
+
+          console.log(response.latestResult)
           setResults(response.tableResults);
           setPercentage(response.tablePercentage);
           setResultsPulse(true);
@@ -58,6 +61,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(1);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence == 3) {
           const response = await fetchInsertResults({
             table_name: tableName,
@@ -71,6 +75,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(3);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence == 5) {
           const response = await fetchInsertResults({
             table_name: tableName,
@@ -84,6 +89,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(5);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence == 10) {
           const response = await fetchInsertResults({
             table_name: tableName,
@@ -97,6 +103,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(10);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence == 25) {
           const response = await fetchInsertResults({
             table_name: tableName,
@@ -110,10 +117,12 @@ function App() {
           setFastNumInterval(30);
           setResultNum(25);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence === "00") {
           const response = await fetchDeleteResults(tableName);
           setResults(response.tableResults);
           setPercentage(response.tablePercentage);
+          setLatestResult(response.latestResult)
         } else if (keySequence == 51) {
           const response = await fetchInsertResults({
             table_name: tableName,
@@ -127,6 +136,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(51);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence == 52) {
           const response = await fetchInsertResults({
             table_name: tableName,
@@ -140,6 +150,7 @@ function App() {
           setFastNumInterval(30);
           setResultNum(52);
           setIsResultsHide(true);
+          setLatestResult(response.latestResult)
         } else if (keySequence == "+++") {
           const response = await fetchUpdateNewShoeTable({ table_name: tableName })
           if (response) {
@@ -191,6 +202,7 @@ function App() {
       setResults(response.tableResults);
       setPercentage(response.tablePercentage);
       setTableInfo(response.tableInfo);
+      setLatestResult(response.latestResult)
     } catch (error) {
       console.log(error);
     }
@@ -199,9 +211,9 @@ function App() {
 
 
   useEffect(() => {
-
     handleFetchGetTableInfo();
   }, []);
+
 
   return (
     <Routes>
@@ -231,6 +243,7 @@ function App() {
                 results,
                 isResultsHide,
                 percentage,
+                latestResult,
                 setResultsPulse,
                 setIsResultsHide,
                 setCount,

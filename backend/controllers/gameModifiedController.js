@@ -4,6 +4,9 @@ const OK = 200;
 const InternalServer = 500;
 
 exports.getTableInfo = async (req, res) => {
+  const queryFindLatestResults =
+    "SELECT results_num FROM tb_results WHERE results_table = ? AND current_shoe = ? order by results_id desc LIMIT 1";
+
   const queryGetTableInfo = "SELECT * FROM tb_table WHERE table_name = ?";
   const queryGetTableResults =
     "SELECT * FROM tb_results WHERE results_table = ? AND current_shoe = ? order by results_id desc";
@@ -81,11 +84,19 @@ exports.getTableInfo = async (req, res) => {
       return newArr;
     }
 
+    const findLatestResults = await databaseQuery(queryFindLatestResults, [
+      tableName,
+      currentShoe,
+    ]);
+
+    const latestResult = findLatestResults[0]?.results_num;
+
     return res.status(OK).send({
       tableInfo: getTableInfo,
       tableResults:
         tableTotalLength <= 20 ? getTableResults : getCustomizeTableResults,
       tablePercentage: calculatePercentageResults(),
+      latestResult: latestResult,
     });
   } catch (error) {
     return res.status(InternalServer).send({
@@ -95,6 +106,8 @@ exports.getTableInfo = async (req, res) => {
 };
 
 exports.postResults = async (req, res) => {
+  const queryFindLatestResults =
+    "SELECT results_num FROM tb_results WHERE results_table = ? AND current_shoe = ? order by results_id desc LIMIT 1";
   const queryGetCurrentShoeTable =
     "SELECT current_shoe FROM tb_table WHERE table_name = ?";
   const queryInsertResults =
@@ -124,6 +137,7 @@ exports.postResults = async (req, res) => {
       table_name,
     ]);
     const currShoeTable = getCurrentShoeTable[0]?.current_shoe;
+
     await databaseQuery(queryInsertResults, [
       table_name,
       results_num,
@@ -174,10 +188,18 @@ exports.postResults = async (req, res) => {
       return newArr;
     }
 
+    const findLatestResults = await databaseQuery(queryFindLatestResults, [
+      table_name,
+      currShoeTable,
+    ]);
+
+    const latestResult = findLatestResults[0]?.results_num;
+
     return res.status(OK).send({
       tableResults:
         tableTotalLength <= 20 ? getTableResults : getCustomizeTableResults,
       tablePercentage: calculatePercentageResults(),
+      latestResult: latestResult,
     });
   } catch (error) {
     return res.status(InternalServer).send({
@@ -187,9 +209,11 @@ exports.postResults = async (req, res) => {
 };
 
 exports.deleteResults = async (req, res) => {
+  const queryFindLatestResults =
+    "SELECT results_num FROM tb_results WHERE results_table = ? AND current_shoe = ? order by results_id desc LIMIT 1";
+
   const queryGetCurrentShoeTable =
     "SELECT current_shoe FROM tb_table WHERE table_name = ?";
-  console.log(queryGetCurrentShoeTable);
 
   const queryGetLatestResultsId =
     "SELECT MAX(results_id) as results_id FROM tb_results WHERE results_table = ? AND current_shoe = ? LIMIT 1;";
@@ -280,10 +304,20 @@ exports.deleteResults = async (req, res) => {
       return newArr;
     }
 
+    const findLatestResults = await databaseQuery(queryFindLatestResults, [
+      table_name,
+      currShoeTable,
+    ]);
+
+    const latestResult = findLatestResults[0]?.results_num;
+
+    console.log(latestResult)
+
     return res.status(OK).send({
       tableResults:
         tableTotalLength <= 20 ? getTableResults : getCustomizeTableResults,
       tablePercentage: calculatePercentageResults(),
+      latestResult: latestResult,
     });
   } catch (error) {
     return res.status(InternalServer).send({
@@ -327,7 +361,7 @@ exports.newShoeTable = async (req, res) => {
     const incrementCurrentShoe = currShoeTable + 1;
     const incrementLatestShoe = latestCurrentShoe + 1;
 
-    console.log(incrementCurrentShoe)
+    console.log(incrementCurrentShoe);
 
     console.log(incrementCurrentShoe);
 
@@ -358,7 +392,7 @@ exports.newShoeTable = async (req, res) => {
       ]);
       await databaseQuery(queryNewShoeTable, [incrementLatestShoe, table_name]);
     } else {
-      console.log("hello")
+      console.log("hello");
       await databaseQuery(queryReportAddlogs, [
         `New shoe detected on table ${table_name}`,
         currShoeTable,
