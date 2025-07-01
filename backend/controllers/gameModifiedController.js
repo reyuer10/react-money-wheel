@@ -72,7 +72,6 @@ exports.getTableInfo = async (req, res) => {
 
     function calculatePercentageResults() {
       let newArr = [];
-      console.log(tableTotalLength);
       getResultsCount.map((c) =>
         newArr.push({
           resultName: c.results_num,
@@ -125,7 +124,6 @@ exports.postResults = async (req, res) => {
       table_name,
     ]);
     const currShoeTable = getCurrentShoeTable[0]?.current_shoe;
-    console.log(currShoeTable);
     await databaseQuery(queryInsertResults, [
       table_name,
       results_num,
@@ -191,6 +189,7 @@ exports.postResults = async (req, res) => {
 exports.deleteResults = async (req, res) => {
   const queryGetCurrentShoeTable =
     "SELECT current_shoe FROM tb_table WHERE table_name = ?";
+  console.log(queryGetCurrentShoeTable);
 
   const queryGetLatestResultsId =
     "SELECT MAX(results_id) as results_id FROM tb_results WHERE results_table = ? AND current_shoe = ? LIMIT 1;";
@@ -323,13 +322,12 @@ exports.newShoeTable = async (req, res) => {
     );
 
     const latestCurrentShoe = findLatestCurrentShoe[0]?.current_shoe;
-
     const currShoeTable = findcurrentShoeTable[0]?.current_shoe;
+
     const incrementCurrentShoe = currShoeTable + 1;
     const incrementLatestShoe = latestCurrentShoe + 1;
 
-    console.log("currShoeTable: ", currShoeTable);
-    console.log("latestCurrentShoe: ", latestCurrentShoe);
+    console.log(incrementCurrentShoe)
 
     if (currShoeTable == null) {
       await databaseQuery(queryReportAddlogs, [
@@ -338,8 +336,7 @@ exports.newShoeTable = async (req, res) => {
         1,
       ]);
       await databaseQuery(queryNewShoeTable, [1, table_name]);
-    }
-    if (currShoeTable < latestCurrentShoe) {
+    } else if (currShoeTable < latestCurrentShoe) {
       await databaseQuery(queryReportAddlogs, [
         `New shoe detected on table ${table_name}`,
         currShoeTable,
@@ -347,6 +344,7 @@ exports.newShoeTable = async (req, res) => {
       ]);
       await databaseQuery(queryNewShoeTable, [incrementLatestShoe, table_name]);
     } else {
+      console.log("hello")
       await databaseQuery(queryReportAddlogs, [
         `New shoe detected on table ${table_name}`,
         currShoeTable,
@@ -378,7 +376,6 @@ exports.getTableShoe = async (req, res) => {
   } = req;
 
   try {
-    console.log(table_name);
     const getTableShoe = await databaseQuery(queryGetTableShoe, [table_name]);
 
     return res.status(OK).send(getTableShoe);

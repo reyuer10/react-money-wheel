@@ -26,7 +26,16 @@ import swerte_bongga_jackpot from "../assets/ads/july/swerte_bongga_jackpot.png"
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 
-const images = [session_template, swerte_daily_treats, swerte_flip_rewards, race2win, swerte_bongga_jackpot, one, three, seven];
+const images = [
+  session_template,
+  swerte_daily_treats,
+  swerte_flip_rewards,
+  race2win,
+  swerte_bongga_jackpot,
+  one,
+  three,
+  seven
+];
 
 const AdvertisementSection = () => {
   return (

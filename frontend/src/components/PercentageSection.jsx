@@ -34,7 +34,7 @@ function PercentageSection() {
                                     src={casinoStotsenbergLogoBlack}
                                     alt="casino-plus-white" />
                             </span>
-                            <span className='text-[44px] text-black drop-shadow-sm drop-shadow-black z-30 flex items-center'>
+                            <span className='text-[44px] text-red-500 drop-shadow-sm drop-shadow-black z-30 flex items-center'>
                                 {initResultCount(51)}
                             </span>
                         </div>
@@ -58,7 +58,7 @@ function PercentageSection() {
                                     src={casinoStotsenbergLogoWhite}
                                     alt="casino-plus-white" />
                             </span>
-                            <span className='text-[44px] text-shadow z-30 flex items-center'>
+                            <span className='text-[44px] text-red-500 text-shadow z-30 flex items-center'>
                                 {initResultCount(52)}
                             </span>
                         </div>
