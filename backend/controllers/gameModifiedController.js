@@ -329,6 +329,20 @@ exports.newShoeTable = async (req, res) => {
 
     console.log(incrementCurrentShoe)
 
+    console.log(incrementCurrentShoe);
+
+    // else if (latestCurrentShoe == null) {
+    //   await databaseQuery(queryReportAddlogs, [
+    //     `New shoe detected on table ${table_name}`,
+    //     currShoeTable,
+    //     incrementCurrentShoe,
+    //   ]);
+
+    //   await databaseQuery(queryNewShoeTable, [
+    //     incrementCurrentShoe,
+    //     table_name,
+    //   ]);
+    // }
     if (currShoeTable == null) {
       await databaseQuery(queryReportAddlogs, [
         `New shoe detected on table ${table_name}`,
